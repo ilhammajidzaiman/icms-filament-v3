@@ -48,7 +48,8 @@ class PostCategoryResource extends Resource
                             ->label('Slug')
                             ->required()
                             ->maxLength(255)
-                            ->disabled(),
+                        // ->disabled()
+                        ,
                     ]),
             ]);
     }
