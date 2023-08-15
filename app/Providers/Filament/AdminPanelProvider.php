@@ -17,6 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\MenuItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -53,6 +54,18 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->sidebarCollapsibleOnDesktop()
+            ->maxContentWidth('full')
+            // ->favicon(asset('images/favicon.png'));
+            // ->colors([
+            //     'danger' => Color::Rose,
+            //     'gray' => Color::Gray,
+            //     'info' => Color::Blue,
+            //     'primary' => Color::Indigo,
+            //     'success' => Color::Emerald,
+            //     'warning' => Color::Orange,
+            // ])
+        ;
     }
 }
