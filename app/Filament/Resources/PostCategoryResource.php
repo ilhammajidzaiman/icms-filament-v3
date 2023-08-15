@@ -42,14 +42,14 @@ class PostCategoryResource extends Resource
                             ->label('Nama')
                             ->required()
                             ->maxLength(255)
-                            ->live()
+                            ->live(1)
                             ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
                             ->label('Slug')
                             ->required()
                             ->maxLength(255)
-                        // ->disabled()
-                        ,
+                            ->disabled()
+                            ->dehydrated(),
                     ]),
             ]);
     }
@@ -102,7 +102,6 @@ class PostCategoryResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
