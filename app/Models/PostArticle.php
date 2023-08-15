@@ -12,6 +12,7 @@ class PostArticle extends Model
     protected $guarded = [];
     protected $casts = [
         'is_active' => 'boolean',
+        'tags' => 'array',
     ];
 
     public function user()
@@ -21,6 +22,6 @@ class PostArticle extends Model
 
     public function category()
     {
-        return $this->belongsTo(BlogCategory::class, 'blog_category_id', 'id');
+        return $this->belongsTo(PostCategory::class, 'post_category_id', 'id');
     }
 }
