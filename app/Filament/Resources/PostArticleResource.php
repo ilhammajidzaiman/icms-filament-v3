@@ -48,7 +48,7 @@ class PostArticleResource extends Resource
                             ->label('Judul')
                             ->required()
                             ->maxLength(255)
-                            ->live()
+                            ->live(1)
                             ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
                             ->label('Slug')
