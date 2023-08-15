@@ -33,8 +33,13 @@ use App\Filament\Resources\PostArticleResource\RelationManagers;
 class PostArticleResource extends Resource
 {
     protected static ?string $model = PostArticle::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $modelLabel = 'Artikel';
+    protected static ?string $navigationLabel = 'Artikel';
+    protected static ?string $slug = 'articles';
+    protected static ?string $recordTitleAttribute = 'title';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

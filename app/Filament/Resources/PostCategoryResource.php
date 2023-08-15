@@ -25,8 +25,13 @@ use App\Filament\Resources\PostCategoryResource\RelationManagers;
 class PostCategoryResource extends Resource
 {
     protected static ?string $model = PostCategory::class;
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $modelLabel = 'Kategori';
+    protected static ?string $navigationLabel = 'Kategori';
+    protected static ?string $slug = 'categories';
     protected static ?string $recordTitleAttribute = 'name';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
