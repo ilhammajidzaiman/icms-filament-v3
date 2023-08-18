@@ -57,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth('full')
-            // ->favicon(asset('images/favicon.png'));
+            ->favicon(asset('image/laravel.svg'));
             // ->colors([
             //     'danger' => Color::Rose,
             //     'gray' => Color::Gray,
