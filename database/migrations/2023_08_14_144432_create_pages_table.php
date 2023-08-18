@@ -13,10 +13,21 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_active')->default(1)->comment('status');
-            $table->string('title')->unique()->comment('judul');
-            $table->string('slug')->unique()->comment('slug');
-            $table->binary('content')->comment('isi');
+            $table->string('title')
+                ->unique()
+                ->comment('judul');
+            $table->string('slug')
+                ->unique()
+                ->comment('slug');
+            $table->binary('content')
+                ->nullable()
+                ->comment('isi');
+            $table->string('file')
+                ->nullable()
+                ->comment('gambar');
+            $table->boolean('is_active')
+                ->default(1)
+                ->comment('status');
             $table->timestamps();
             $table->softDeletes();
         });

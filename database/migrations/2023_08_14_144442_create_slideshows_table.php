@@ -13,11 +13,22 @@ return new class extends Migration
     {
         Schema::create('slideshows', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_active')->default(1)->comment('status');
-            $table->string('title')->nullable()->unique()->comment('judul');
-            $table->string('slug')->nullable()->unique()->comment('slug');
-            $table->string('subtitle')->nullable()->comment('subtitle');
-            $table->string('file')->comment('gambar');
+            $table->string('title')
+                ->nullable()
+                ->unique()
+                ->comment('judul');
+            $table->string('slug')
+                ->nullable()
+                ->unique()
+                ->comment('slug');
+            $table->string('subtitle')
+                ->nullable()
+                ->comment('subtitle');
+            $table->string('file')
+                ->comment('gambar');
+            $table->boolean('is_active')
+                ->default(1)
+                ->comment('status');
             $table->timestamps();
             $table->softDeletes();
         });
