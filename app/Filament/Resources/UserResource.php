@@ -43,8 +43,6 @@ class UserResource extends Resource
                 Section::make()
                     ->columnSpan(2)
                     ->schema([
-                        Toggle::make('is_active')
-                            ->required(),
                         TextInput::make('name')
                             ->required()
                             ->maxLength(255),
@@ -55,20 +53,26 @@ class UserResource extends Resource
                         TextInput::make('password')
                             ->password()
                             ->required()
-                            ->maxLength(255),
-                        FileUpload::make('file')
-                            ->label('File')
-                            ->required(),
+                            ->maxLength(255)
+                            ->hiddenOn('edit'),
                     ]),
                 Section::make()
                     ->columnSpan(1)
                     ->schema([
                         Toggle::make('is_active')
                             ->label('Status')
-                            ->required(),
+                            ->required()
+                            ->default('1'),
                         FileUpload::make('file')
                             ->label('File')
-                            ->required(),
+                            ->required()
+                            ->maxSize(1024)
+                            ->directory('users  /' . date('Y/m'))
+                            ->image()
+                            ->imageEditor()
+                            ->openable()
+                            ->downloadable()
+                            ->helperText('Maksimal ukuran file 1024 kb atau 1 mb'),
                     ])
             ]);
     }
@@ -155,6 +159,7 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
+            'view' => Pages\ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
