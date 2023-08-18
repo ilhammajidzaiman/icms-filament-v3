@@ -29,6 +29,7 @@ class SlideshowResource extends Resource
 {
     protected static ?string $model = Slideshow::class;
     protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static ?string $activeNavigationIcon = 'heroicon-s-photo';
     protected static ?string $modelLabel = 'Tampilan slide';
     protected static ?string $navigationLabel = 'Tampilan slide';
     protected static ?string $slug = 'slideshow';

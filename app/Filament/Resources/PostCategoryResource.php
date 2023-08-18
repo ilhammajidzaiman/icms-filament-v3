@@ -26,6 +26,7 @@ class PostCategoryResource extends Resource
 {
     protected static ?string $model = PostCategory::class;
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    protected static ?string $activeNavigationIcon = 'heroicon-s-bookmark';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Kategori';
     protected static ?string $navigationLabel = 'Kategori';

@@ -30,6 +30,7 @@ class PageResource extends Resource
     protected static ?string $model = Page::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
+    protected static ?string $activeNavigationIcon = 'heroicon-s-document';
     protected static ?string $modelLabel = 'Halaman';
     protected static ?string $navigationLabel = 'Halaman';
     protected static ?string $slug = 'pages';

@@ -34,6 +34,7 @@ class PostArticleResource extends Resource
 {
     protected static ?string $model = PostArticle::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static ?string $activeNavigationIcon = 'heroicon-s-document-duplicate';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Artikel';
     protected static ?string $navigationLabel = 'Artikel';
