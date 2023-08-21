@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('slug')
                 ->unique()
                 ->comment('slug');
-            $table->binary('content')
+            $table->longText('content')
                 ->nullable()
                 ->comment('isi ');
             $table->string('tags')
