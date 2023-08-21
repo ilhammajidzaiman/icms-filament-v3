@@ -75,7 +75,7 @@ class PageResource extends Resource
                             ->imageEditor()
                             ->openable()
                             ->downloadable()
-                            ->helperText('Thumbnail boleh kosong. Maksimal ukuran file 1024 kb atau 1 mb.'),
+                            ->helperText('Maksimal ukuran file 1024 kb atau 1 mb.'),
                     ]),
             ]);
     }

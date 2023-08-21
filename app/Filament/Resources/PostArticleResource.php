@@ -92,7 +92,7 @@ class PostArticleResource extends Resource
                             ->reactive()
                             ->options(PostCategory::all()->pluck('name', 'id')),
                         TagsInput::make('tags')
-                            ->label('Menandai')
+                            ->label('Tanda/Topik')
                             ->required()
                             ->separator(',')
                             ->suggestions(PostCategory::all()->pluck('name')),

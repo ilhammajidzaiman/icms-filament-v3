@@ -39,12 +39,6 @@ class SlideshowResource extends Resource
     {
         return $form
             ->schema([
-                // Forms\Components\TextInput::make('file')
-                //     ->required()
-                //     ->maxLength(255),
-                // Forms\Components\Toggle::make('is_active')
-                //     ->required(),
-
                 Section::make()
                     ->columnSpan(2)
                     ->schema([
@@ -71,7 +65,7 @@ class SlideshowResource extends Resource
                             ->imageEditor()
                             ->openable()
                             ->downloadable()
-                            ->helperText('Gambar harus diisi. Maksimal ukuran file 1024 kb atau 1 mb.'),
+                            ->helperText('Maksimal ukuran file 1024 kb atau 1 mb.'),
                         Toggle::make('is_active')
                             ->label('Status')
                             ->required()
