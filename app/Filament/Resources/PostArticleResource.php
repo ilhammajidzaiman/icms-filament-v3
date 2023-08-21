@@ -63,7 +63,7 @@ class PostArticleResource extends Resource
                             ->disabled()
                             ->dehydrated(),
                         RichEditor::make('content')
-                            ->label('Konten')
+                            ->label('Isi')
                             ->required(),
                     ]),
                 Section::make()
@@ -100,7 +100,7 @@ class PostArticleResource extends Resource
                             ->label('File')
                             ->required()
                             ->maxSize(1024)
-                            ->directory('articles/' . date('Y/m'))
+                            ->directory('article/' . date('Y/m'))
                             ->image()
                             ->imageEditor()
                             ->openable()

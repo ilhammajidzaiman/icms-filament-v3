@@ -35,6 +35,7 @@ class PageResource extends Resource
     protected static ?string $navigationLabel = 'Halaman';
     protected static ?string $slug = 'pages';
     protected static ?string $recordTitleAttribute = 'title';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -57,7 +58,7 @@ class PageResource extends Resource
                             ->disabled()
                             ->dehydrated(),
                         RichEditor::make('content')
-                            ->label('Konten')
+                            ->label('Isi')
                             ->required(),
                     ]),
                 Section::make()
@@ -70,7 +71,7 @@ class PageResource extends Resource
                         FileUpload::make('file')
                             ->label('File')
                             ->maxSize(1024)
-                            ->directory('pages/' . date('Y/m'))
+                            ->directory('page/' . date('Y/m'))
                             ->image()
                             ->imageEditor()
                             ->openable()

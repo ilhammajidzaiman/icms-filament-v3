@@ -67,7 +67,7 @@ class UserResource extends Resource
                             ->label('File')
                             ->required()
                             ->maxSize(1024)
-                            ->directory('users  /' . date('Y/m'))
+                            ->directory('user/' . date('Y/m'))
                             ->image()
                             ->imageEditor()
                             ->openable()

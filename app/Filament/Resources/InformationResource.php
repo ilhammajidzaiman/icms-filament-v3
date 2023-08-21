@@ -58,7 +58,7 @@ class InformationResource extends Resource
                             ->disabled()
                             ->dehydrated(),
                         RichEditor::make('content')
-                            ->label('Konten'),
+                            ->label('Isi'),
                     ]),
                 Section::make()
                     ->columnSpan(1)

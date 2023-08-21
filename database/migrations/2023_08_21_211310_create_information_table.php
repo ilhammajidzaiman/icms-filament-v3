@@ -20,6 +20,7 @@ return new class extends Migration
                 ->unique()
                 ->comment('slug');
             $table->longText('content')
+                ->nullable()
                 ->comment('isi');
             $table->string('file')
                 ->nullable()

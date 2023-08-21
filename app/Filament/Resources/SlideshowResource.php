@@ -34,6 +34,7 @@ class SlideshowResource extends Resource
     protected static ?string $navigationLabel = 'Tampilan slide';
     protected static ?string $slug = 'slideshow';
     protected static ?string $recordTitleAttribute = 'title';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -60,7 +61,7 @@ class SlideshowResource extends Resource
                             ->label('File')
                             ->required()
                             ->maxSize(1024)
-                            ->directory('slideshows/' . date('Y/m'))
+                            ->directory('slideshow/' . date('Y/m'))
                             ->image()
                             ->imageEditor()
                             ->openable()
