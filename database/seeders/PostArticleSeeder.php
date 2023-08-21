@@ -17,9 +17,9 @@ class PostArticleSeeder extends Seeder
         PostArticle::create([
             'user_id'           => '1',
             'post_category_id'  => '1',
-            'title'             => 'Hello world. Selamat datang. Ini adalah post artikel pertama anda',
-            'slug'              => 'hello-world-selamat-datang-ini-adalah-post-artikel-pertama-anda',
-            'content'           => 'Selamat datang. Ini adalah post artikel pertama anda. Silahkan edit atau hapus post artikel ini.',
+            'title'             => 'Selamat datang, Ini adalah artikel pertama',
+            'slug'              => 'selamat-datang-ini-adalah-artikel-pertama',
+            'content'           => 'Hello world. Selamat datang, Ini adalah artikel pertama anda. Silahkan edit atau hapus artikel ini.',
             'tags'              => '"Tutorial,Laravel,Filament"',
             'file'              => null,
             'visitor'           => 0,
