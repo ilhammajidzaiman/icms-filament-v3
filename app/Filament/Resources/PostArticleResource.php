@@ -26,6 +26,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Enums\ActionsPosition;
+use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostArticleResource\Pages;
 use App\Filament\Resources\PostArticleResource\RelationManagers;
@@ -73,6 +74,11 @@ class PostArticleResource extends Resource
                             ->label('Status')
                             ->required()
                             ->default('1'),
+                        DateTimePicker::make('published_at')
+                            ->label('Tanggal rilis')
+                            ->required()
+                            // ->default(date('Y')),
+                            ->default(now()),
                         Hidden::make('user_id')
                             ->label('Id Penulis')
                             ->required()
@@ -88,13 +94,40 @@ class PostArticleResource extends Resource
                         Select::make('post_category_id')
                             ->label('Kategori')
                             ->required()
-                            ->searchable()
-                            ->reactive()
-                            ->options(PostCategory::all()->pluck('name', 'id')),
+                            ->options(PostCategory::all()->pluck('name', 'id'))
+                            ->relationship(name: 'category', titleAttribute: 'name')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nama')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(1)
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                                TextInput::make('slug')
+                                    ->label('Slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->disabled()
+                                    ->dehydrated(),
+                            ])
+                            ->editOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nama')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(1)
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                                TextInput::make('slug')
+                                    ->label('Slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->disabled()
+                                    ->dehydrated(),
+                            ]),
                         TagsInput::make('tags')
                             ->label('Tanda/Topik')
                             ->required()
-                            ->separator(',')
+                            // ->separator(',')
                             ->suggestions(PostCategory::all()->pluck('name')),
                         FileUpload::make('file')
                             ->label('File')
@@ -156,6 +189,10 @@ class PostArticleResource extends Resource
                     ->label('Tag')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('published_at')
+                    ->label('Diterbitkan ')
+                    ->dateTime()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
@@ -170,6 +207,7 @@ class PostArticleResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 ToggleColumn::make('is_active')
                     ->label('Status')
                     ->sortable(),

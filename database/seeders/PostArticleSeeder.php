@@ -20,10 +20,11 @@ class PostArticleSeeder extends Seeder
             'title'             => 'Selamat datang, Ini adalah artikel pertama',
             'slug'              => 'selamat-datang-ini-adalah-artikel-pertama',
             'content'           => 'Hello world. Selamat datang, Ini adalah artikel pertama anda. Silahkan edit atau hapus artikel ini.',
-            'tags'              => '"Tutorial,Laravel,Filament"',
-            'file'              => null,
+            'tags'              => ["Tutorial"],
             'visitor'           => 0,
             'is_active'         => 1,
+            'published_at'      => now(),
+
         ]);
     }
 }

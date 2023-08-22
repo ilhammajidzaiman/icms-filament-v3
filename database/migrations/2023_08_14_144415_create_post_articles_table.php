@@ -44,6 +44,9 @@ return new class extends Migration
             $table->boolean('is_active')
                 ->default(1)
                 ->comment('status');
+            $table->timestamp('published_at')
+                ->nullable()
+                ->comment('diterbitkan');
             $table->timestamps();
             $table->softDeletes();
         });
