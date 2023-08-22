@@ -17,5 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    return redirect('admin/login');
+    return view('index');
 });
+Route::get('/auth/login', function () {
+    return redirect('admin/login');
+})->name('login');
