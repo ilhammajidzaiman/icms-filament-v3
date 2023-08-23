@@ -55,7 +55,7 @@ class PostArticleResource extends Resource
                             ->label('Judul')
                             ->required()
                             ->maxLength(255)
-                            ->live(1)
+                            ->live(onBlur: true)
                             ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
                             ->label('Slug')
@@ -77,7 +77,6 @@ class PostArticleResource extends Resource
                         DateTimePicker::make('published_at')
                             ->label('Tanggal rilis')
                             ->required()
-                            // ->default(date('Y')),
                             ->default(now()),
                         Hidden::make('user_id')
                             ->label('Id Penulis')
