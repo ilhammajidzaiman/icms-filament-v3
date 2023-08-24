@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use stdClass;
-use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
@@ -30,7 +29,7 @@ class PostCategoryResource extends Resource
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Kategori';
     protected static ?string $navigationLabel = 'Kategori';
-    protected static ?string $slug = 'categories';
+    protected static ?string $slug = 'categoriy';
     protected static ?string $recordTitleAttribute = 'name';
     protected static ?int $navigationSort = 1;
 

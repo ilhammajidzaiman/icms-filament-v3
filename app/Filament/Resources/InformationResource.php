@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use stdClass;
-use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
@@ -33,7 +32,7 @@ class InformationResource extends Resource
     protected static ?string $activeNavigationIcon = 'heroicon-s-bell';
     protected static ?string $modelLabel = 'Informasi';
     protected static ?string $navigationLabel = 'Informasi';
-    // protected static ?string $slug = 'information';
+    protected static ?string $slug = 'information';
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 3;
 

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use stdClass;
-use Filament\Forms;
 use App\Models\File;
 use Filament\Tables;
 use Filament\Forms\Set;
@@ -32,7 +31,7 @@ class FileResource extends Resource
     protected static ?string $activeNavigationIcon = 'heroicon-s-archive-box';
     protected static ?string $modelLabel = 'File';
     protected static ?string $navigationLabel = 'File';
-    // protected static ?string $slug = 'file';
+    protected static ?string $slug = 'file';
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 4;
 

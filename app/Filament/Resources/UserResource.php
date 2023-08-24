@@ -31,7 +31,7 @@ class UserResource extends Resource
     protected static ?string $modelLabel = 'User';
     protected static ?string $navigationGroup = 'Admin';
     protected static ?string $navigationLabel = 'User';
-    protected static ?string $slug = 'users';
+    protected static ?string $slug = 'user';
     protected static ?int $navigationSort = 2;
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -123,7 +123,6 @@ class UserResource extends Resource
                 ToggleColumn::make('is_active')
                     ->label('Status')
                     ->searchable(),
-
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

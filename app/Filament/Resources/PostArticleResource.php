@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use stdClass;
-use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
@@ -25,7 +24,6 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Enums\ActionsPosition;
 use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostArticleResource\Pages;
@@ -39,7 +37,7 @@ class PostArticleResource extends Resource
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Artikel';
     protected static ?string $navigationLabel = 'Artikel';
-    protected static ?string $slug = 'articles';
+    protected static ?string $slug = 'article';
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 2;
 

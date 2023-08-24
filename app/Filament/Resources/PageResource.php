@@ -33,7 +33,7 @@ class PageResource extends Resource
     protected static ?string $activeNavigationIcon = 'heroicon-s-document';
     protected static ?string $modelLabel = 'Halaman';
     protected static ?string $navigationLabel = 'Halaman';
-    protected static ?string $slug = 'pages';
+    protected static ?string $slug = 'page';
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 1;
 
