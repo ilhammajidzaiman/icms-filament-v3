@@ -9,6 +9,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
@@ -18,6 +19,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rules\Password;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
@@ -44,17 +46,29 @@ class UserResource extends Resource
                     ->columnSpan(2)
                     ->schema([
                         TextInput::make('name')
+                            ->label('Nama')
                             ->required()
                             ->maxLength(255),
                         TextInput::make('email')
+                            ->label('E-mail')
                             ->email()
                             ->required()
                             ->maxLength(255),
                         TextInput::make('password')
+                            ->label('Password')
                             ->password()
                             ->required()
                             ->maxLength(255)
-                            ->hiddenOn('edit'),
+                            ->same('confirmation')
+                            // ->autocomplete('new-password')
+                            ->rule(Password::default())
+                            ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
+                        TextInput::make('confirmation')
+                            ->label('Konfirmasi password')
+                            ->password()
+                            ->required()
+                            ->maxLength(255)
+                            ->dehydrated(false),
                     ]),
                 Section::make()
                     ->columnSpan(1)
