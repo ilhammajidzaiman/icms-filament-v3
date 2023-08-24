@@ -101,7 +101,8 @@ class PostArticleResource extends Resource
                                     ->required()
                                     ->maxLength(255)
                                     ->live(1)
-                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                                    ->unique(table: PostCategory::class),
                                 TextInput::make('slug')
                                     ->label('Slug')
                                     ->required()
@@ -115,7 +116,8 @@ class PostArticleResource extends Resource
                                     ->required()
                                     ->maxLength(255)
                                     ->live(1)
-                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                                    ->unique(table: PostCategory::class),
                                 TextInput::make('slug')
                                     ->label('Slug')
                                     ->required()
