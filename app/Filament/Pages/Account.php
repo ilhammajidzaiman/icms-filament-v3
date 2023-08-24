@@ -2,13 +2,15 @@
 
 namespace App\Filament\Pages;
 
-use stdClass;
+use App\Models\Post;
+use App\Models\User;
+use Livewire\Component;
 use Filament\Pages\Page;
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\ToggleColumn;
+use Filament\Actions\Action;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Actions\Concerns\InteractsWithActions;
 
 class Account extends Page
 {
@@ -20,4 +22,13 @@ class Account extends Page
     protected static ?string $navigationLabel = 'Akun';
     protected static ?string $slug = 'account';
     protected static ?int $navigationSort = 1;
+
+    public User $user;
+
+    public function deleteAction(): Action
+    {
+        return Action::make('delete')
+            ->requiresConfirmation()
+            ->action(fn () => $this->user->delete());
+    }
 }
