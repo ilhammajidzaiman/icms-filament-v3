@@ -1,0 +1,3 @@
+<x-filament-panels::page>
+    <h1>oke</h1>
+</x-filament-panels::page>
