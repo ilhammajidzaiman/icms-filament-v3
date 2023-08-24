@@ -58,16 +58,16 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth('full')
             ->favicon(asset('image/laravel.svg'))
-            // ->colors([
-            //     'danger' => Color::Rose,
-            //     'gray' => Color::Gray,
-            //     'info' => Color::Blue,
-            //     'primary' => Color::Indigo,
-            //     'success' => Color::Emerald,
-            //     'warning' => Color::Orange,
-            // ])
+            ->colors([
+                'danger' => Color::Rose,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'primary' => Color::Indigo,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
+            ])
             ->userMenuItems([
-                'profile' => MenuItem::make()->label('Edit profile'),
+                'setting' => MenuItem::make()->label('Edit profile'),
             ]);
     }
 }
