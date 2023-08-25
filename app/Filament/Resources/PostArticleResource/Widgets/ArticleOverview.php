@@ -16,7 +16,8 @@ class ArticleOverview extends BaseWidget
             Stat::make('Artikel', PostArticle::all()->count())
                 ->description('Jumlah artikel')
                 ->descriptionIcon('heroicon-o-newspaper')
-                ->color('primary'),
+                ->color('primary')
+                ->chart([PostArticle::all()->count()]),
             Stat::make('Diterbitkan', PostArticle::where('is_active', true)->count())
                 ->description('Jumlah diterbitkan')
                 ->descriptionIcon('heroicon-o-rocket-launch')
