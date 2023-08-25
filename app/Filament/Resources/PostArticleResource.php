@@ -28,6 +28,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostArticleResource\Pages;
 use App\Filament\Resources\PostArticleResource\RelationManagers;
+use App\Filament\Resources\PostArticleResource\Widgets\ArticleOverview;
 
 class PostArticleResource extends Resource
 {
@@ -256,5 +257,12 @@ class PostArticleResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ArticleOverview::class,
+        ];
     }
 }
