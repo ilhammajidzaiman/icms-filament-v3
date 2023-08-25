@@ -10,8 +10,9 @@ use Filament\Widgets\ChartWidget;
 class PostArticleChart extends ChartWidget
 {
     protected static ?string $heading = 'Post perbulan';
-    protected static string $color = 'primary';
+    protected static string $color = 'info';
     protected static ?string $maxHeight = '300px';
+    protected static bool $isLazy = true;
     protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array
@@ -28,8 +29,9 @@ class PostArticleChart extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Post',
-                    'backgroundColor' => '#36A2EB',
-                    'borderColor' => '#9BD0F5',
+                    // 'backgroundColor' => '#36A2EB',
+                    // 'borderColor' => '#9BD0F5',
+                    'fill' => 'start',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
