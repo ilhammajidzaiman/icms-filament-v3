@@ -14,16 +14,16 @@ class ArticleOverview extends BaseWidget
     {
         return [
             Stat::make('Artikel', PostArticle::all()->count())
-                ->description('Jumlah artikel')
+                // ->description('Jumlah artikel')
                 ->descriptionIcon('heroicon-o-newspaper')
                 ->color('primary')
                 ->chart([PostArticle::all()->count()]),
             Stat::make('Diterbitkan', PostArticle::where('is_active', true)->count())
-                ->description('Jumlah diterbitkan')
+                // ->description('Jumlah diterbitkan')
                 ->descriptionIcon('heroicon-o-rocket-launch')
                 ->color('success'),
             Stat::make('Draft', PostArticle::where('is_active', false)->count())
-                ->description('Jumlah belum diterbitkan')
+                // ->description('Jumlah belum diterbitkan')
                 ->descriptionIcon('heroicon-o-archive-box')
                 ->color('warning'),
         ];
