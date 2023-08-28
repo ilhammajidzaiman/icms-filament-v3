@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\PageResource\Pages;
 
-use App\Filament\Resources\PageResource;
 use Filament\Actions;
+use App\Filament\Resources\PageResource;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\PageResource\Widgets\PageOverview;
 
 class ListPages extends ListRecords
 {
@@ -14,6 +15,13 @@ class ListPages extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            PageOverview::class,
         ];
     }
 }
