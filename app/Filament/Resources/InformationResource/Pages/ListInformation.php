@@ -5,7 +5,7 @@ namespace App\Filament\Resources\InformationResource\Pages;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\InformationResource;
-use App\Filament\Resources\PageResource\Widgets\PageOverview;
+use App\Filament\Resources\InformationResource\Widgets\InformationOverview;
 
 class ListInformation extends ListRecords
 {
@@ -22,7 +22,7 @@ class ListInformation extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            PageOverview::class,
+            InformationOverview::class,
         ];
     }
 }
