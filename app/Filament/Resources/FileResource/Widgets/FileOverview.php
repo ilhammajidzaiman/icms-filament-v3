@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\FileResource\Widgets;
 
 use App\Models\File;
-use Faker\Provider\Base;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
