@@ -22,7 +22,6 @@ class PostArticleSeeder extends Seeder
             'content'           => 'Hello world. Selamat datang, Ini adalah artikel pertama anda. Silahkan edit atau hapus artikel ini.',
             'tags'              => ["Tutorial"],
             'visitor'           => 0,
-            'is_active'         => 1,
             'published_at'      => now(),
 
         ]);

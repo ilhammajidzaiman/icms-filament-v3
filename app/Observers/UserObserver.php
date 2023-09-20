@@ -12,9 +12,9 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        if ($user->isDirty('file')) {
-            Storage::disk('public')->delete($user->getOriginal('file'));
-        }
+        // if ($user->isDirty('file')) {
+        //     Storage::disk('public')->delete($user->getOriginal('file'));
+        // }
     }
 
     /**
@@ -46,8 +46,8 @@ class UserObserver
      */
     public function forceDeleted(User $user): void
     {
-        if (!is_null($user->file)) {
-            Storage::disk('public')->delete($user->file);
-        }
+        // if (!is_null($user->file)) {
+        //     Storage::disk('public')->delete($user->file);
+        // }
     }
 }

@@ -38,15 +38,6 @@ class FileResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-
-            //     Forms\Components\TextInput::make('thumbnail')
-            //         ->maxLength(255),
-            //     Forms\Components\TextInput::make('file')
-            //         ->required()
-            //         ->maxLength(255),
-            //     Forms\Components\Toggle::make('is_active')
-            //         ->required(),
-            // ]);
             ->columns(3)
             ->schema([
                 Section::make()
@@ -56,7 +47,7 @@ class FileResource extends Resource
                             ->label('Judul')
                             ->required()
                             ->maxLength(255)
-                            ->live(1)
+                            ->live(onBlur: true)
                             ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
                             ->label('Slug')
@@ -141,29 +132,6 @@ class FileResource extends Resource
                     ->label('Status')
                     ->sortable(),
             ])
-            // ->columns([
-            //     Tables\Columns\TextColumn::make('title')
-            //         ->searchable(),
-            //     Tables\Columns\TextColumn::make('slug')
-            //         ->searchable(),
-            //     Tables\Columns\TextColumn::make('thumbnail')
-            //         ->searchable(),
-            //     Tables\Columns\TextColumn::make('file')
-            //         ->searchable(),
-            //     Tables\Columns\IconColumn::make('is_active')
-            //         ->boolean(),
-            //     Tables\Columns\TextColumn::make('created_at')
-            //         ->dateTime()
-            //         ->sortable()
-            //         ->toggleable(isToggledHiddenByDefault: true),
-            //     Tables\Columns\TextColumn::make('updated_at')
-            //         ->dateTime()
-            //         ->sortable()
-            //         ->toggleable(isToggledHiddenByDefault: true),
-            //     Tables\Columns\TextColumn::make('deleted_at')
-            //         ->dateTime()
-            //         ->sortable(),
-            // ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])

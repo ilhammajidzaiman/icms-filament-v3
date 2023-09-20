@@ -17,27 +17,22 @@ class PostCategorySeeder extends Seeder
         PostCategory::create([
             'name'          => 'Tutorial',
             'slug'          => 'Tutorial',
-            'is_active'     => 1,
         ]);
         PostCategory::create([
-            'name'          => 'Php',
-            'slug'          => 'php',
-            'is_active'     => 1,
+            'name'          => 'Programming',
+            'slug'          => 'programming',
         ]);
         PostCategory::create([
-            'name'          => 'Laravel',
-            'slug'          => 'laravel',
-            'is_active'     => 1,
+            'name'          => 'Backend',
+            'slug'          => 'backend',
         ]);
         PostCategory::create([
-            'name'          => 'Livewire',
-            'slug'          => 'livewire',
-            'is_active'     => 1,
+            'name'          => 'Frontend',
+            'slug'          => 'frontend',
         ]);
         PostCategory::create([
             'name'          => 'Filament',
             'slug'          => 'filament',
-            'is_active'     => 1,
         ]);
     }
 }

@@ -47,7 +47,7 @@ class PostCategoryResource extends Resource
                             ->label('Nama')
                             ->required()
                             ->maxLength(255)
-                            ->live(1)
+                            ->live(onBlur: true)
                             ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                         TextInput::make('slug')
                             ->label('Slug')

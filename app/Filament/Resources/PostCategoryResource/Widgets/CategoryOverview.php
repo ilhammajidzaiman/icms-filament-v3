@@ -17,7 +17,7 @@ class CategoryOverview extends BaseWidget
                 ->chart([PostCategory::all()->count()]),
             Stat::make('Aktif', PostCategory::where('is_active', true)->count())
                 ->color('success'),
-            Stat::make('Tidak Aktif', PostCategory::where('is_active', true)->count())
+            Stat::make('Tidak Aktif', PostCategory::where('is_active', false)->count())
                 ->color('success'),
         ];
     }

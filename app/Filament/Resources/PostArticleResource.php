@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostArticleResource\Pages;
 use App\Filament\Resources\PostArticleResource\RelationManagers;
 use App\Filament\Resources\PostArticleResource\Widgets\ArticleOverview;
+use App\Models\PostTag;
 
 class PostArticleResource extends Resource
 {
@@ -40,7 +41,7 @@ class PostArticleResource extends Resource
     protected static ?string $navigationLabel = 'Artikel';
     protected static ?string $slug = 'article';
     protected static ?string $recordTitleAttribute = 'title';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -99,7 +100,7 @@ class PostArticleResource extends Resource
                                     ->label('Nama')
                                     ->required()
                                     ->maxLength(255)
-                                    ->live(1)
+                                    ->live(onBlur: true)
                                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
                                     ->unique(table: PostCategory::class),
                                 TextInput::make('slug')
@@ -114,7 +115,7 @@ class PostArticleResource extends Resource
                                     ->label('Nama')
                                     ->required()
                                     ->maxLength(255)
-                                    ->live(1)
+                                    ->live(onBlur: true)
                                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
                                     ->unique(table: PostCategory::class),
                                 TextInput::make('slug')
@@ -124,11 +125,35 @@ class PostArticleResource extends Resource
                                     ->disabled()
                                     ->dehydrated(),
                             ]),
-                        TagsInput::make('tags')
+                        // TagsInput::make('tags')
+                        //     ->label('Tanda/Topik')
+                        //     ->required()
+                        //     // ->separator(',')
+                        //     ->suggestions(PostTag::all()->pluck('name')),
+                        Select::make('tags')
                             ->label('Tanda/Topik')
                             ->required()
-                            // ->separator(',')
-                            ->suggestions(PostCategory::all()->pluck('name')),
+                            ->multiple()
+                            ->searchable()
+                            ->options(PostTag::all()->pluck('name', 'id'))
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nama')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set(
+                                        'slug',
+                                        Str::slug($state)
+                                    ))
+                                    ->unique(table: PostTag::class),
+                                TextInput::make('slug')
+                                    ->label('Slug')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->disabled()
+                                    ->dehydrated(),
+                            ]),
                         FileUpload::make('file')
                             ->label('File')
                             ->required()
