@@ -14,6 +14,7 @@ class PageSeeder extends Seeder
     public function run(): void
     {
         Page::create([
+            'user_id'           => 1,
             'title'             => 'Selamat datang',
             'slug'              => 'selamat-datang',
             'content'           => 'Hello world. Selamat datang, Ini adalah halaman pertama anda. Silahkan edit atau hapus halaman ini.',

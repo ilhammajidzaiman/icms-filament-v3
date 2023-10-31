@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slideshows', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)
                 ->constrained()
@@ -20,19 +20,12 @@ return new class extends Migration
                 ->restrictOnDelete()
                 ->nullable()
                 ->comment('id table users');
-            $table->string('title')
-                ->nullable()
+            $table->string('name')
                 ->unique()
-                ->comment('judul');
+                ->comment('nama');
             $table->string('slug')
-                ->nullable()
                 ->unique()
                 ->comment('slug');
-            $table->string('subtitle')
-                ->nullable()
-                ->comment('subtitle');
-            $table->string('file')
-                ->comment('gambar');
             $table->boolean('is_active')
                 ->default(1)
                 ->comment('status');
@@ -46,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('slideshows');
+        Schema::dropIfExists('categories');
     }
 };
