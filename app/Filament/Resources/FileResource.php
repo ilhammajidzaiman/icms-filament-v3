@@ -12,12 +12,12 @@ use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\FileResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -28,7 +28,7 @@ class FileResource extends Resource
     protected static ?string $model = File::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-archive-box';
-    protected static ?string $activeNavigationIcon = 'heroicon-s-archive-box';
+    protected static ?string $navigationGroup = 'Media';
     protected static ?string $modelLabel = 'File';
     protected static ?string $navigationLabel = 'File';
     protected static ?string $slug = 'file';
@@ -97,27 +97,26 @@ class FileResource extends Resource
                             );
                         }
                     ),
-                TextColumn::make('id')
-                    ->label('Id')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 ImageColumn::make('thumbnail')
                     ->label('Sampul')
+                    ->defaultImageUrl(asset('/image/default-img.svg'))
                     ->circular()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('title')
                     ->label('Judul')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->label('Slug')
+                TextColumn::make('user.name')
+                    ->label('Penulis')
+                    ->badge()
+                    ->color('info')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime()
@@ -128,8 +127,9 @@ class FileResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                ToggleColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->label('Status')
+                    ->boolean()
                     ->sortable(),
             ])
             ->filters([
@@ -166,8 +166,8 @@ class FileResource extends Resource
         return [
             'index' => Pages\ListFiles::route('/'),
             'create' => Pages\CreateFile::route('/create'),
-            'view' => Pages\ViewFile::route('/{record}'),
             'edit' => Pages\EditFile::route('/{record}/edit'),
+            'view' => Pages\ViewFile::route('/{record}'),
         ];
     }
 

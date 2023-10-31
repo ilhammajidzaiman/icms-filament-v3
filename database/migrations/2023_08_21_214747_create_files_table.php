@@ -30,6 +30,7 @@ return new class extends Migration
                 ->nullable()
                 ->comment('gambar cover');
             $table->string('file')
+                ->nullable()
                 ->comment('pdf, doc, xls, ppt, jpg, png, dll');
             $table->boolean('is_active')
                 ->default(1)

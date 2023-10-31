@@ -16,27 +16,27 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             'user_id'       => 1,
-            'name'          => 'Tutorial',
+            'title'         => 'Tutorial',
             'slug'          => 'Tutorial',
         ]);
         Category::create([
             'user_id'       => 1,
-            'name'          => 'Programming',
+            'title'         => 'Programming',
             'slug'          => 'programming',
         ]);
         Category::create([
             'user_id'       => 1,
-            'name'          => 'Backend',
+            'title'         => 'Backend',
             'slug'          => 'backend',
         ]);
         Category::create([
             'user_id'       => 1,
-            'name'          => 'Frontend',
+            'title'         => 'Frontend',
             'slug'          => 'frontend',
         ]);
         Category::create([
             'user_id'       => 1,
-            'name'          => 'Filament',
+            'title'         => 'Filament',
             'slug'          => 'filament',
         ]);
     }

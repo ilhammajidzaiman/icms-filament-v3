@@ -13,12 +13,12 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SlideshowResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -28,7 +28,7 @@ class SlideshowResource extends Resource
 {
     protected static ?string $model = Slideshow::class;
     protected static ?string $navigationIcon = 'heroicon-o-photo';
-    protected static ?string $activeNavigationIcon = 'heroicon-s-photo';
+    protected static ?string $navigationGroup = 'Media';
     protected static ?string $modelLabel = 'Tampilan slide';
     protected static ?string $navigationLabel = 'Tampilan slide';
     protected static ?string $slug = 'slideshow';
@@ -89,31 +89,25 @@ class SlideshowResource extends Resource
                             );
                         }
                     ),
-                TextColumn::make('id')
-                    ->label('Id')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 ImageColumn::make('file')
                     ->label('File')
+                    ->defaultImageUrl(asset('/image/default-slideshow.svg'))
                     ->circular(),
                 TextColumn::make('title')
                     ->label('Judul')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->label('Slug')
+                TextColumn::make('user.name')
+                    ->label('Penulis')
+                    ->badge()
+                    ->color('info')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('subtitle')
-                    ->label('Sub Judul')
-                    ->sortable()
-                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime()
@@ -124,8 +118,9 @@ class SlideshowResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                ToggleColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->label('Status')
+                    ->boolean()
                     ->sortable(),
             ])
             ->filters([
@@ -162,8 +157,8 @@ class SlideshowResource extends Resource
         return [
             'index' => Pages\ListSlideshows::route('/'),
             'create' => Pages\CreateSlideshow::route('/create'),
-            'view' => Pages\ViewSlideshow::route('/{record}'),
             'edit' => Pages\EditSlideshow::route('/{record}/edit'),
+            'view' => Pages\ViewSlideshow::route('/{record}'),
         ];
     }
 

@@ -12,12 +12,12 @@ use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rules\Password;
 use App\Filament\Resources\UserResource\Pages;
@@ -29,9 +29,8 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
-    protected static ?string $activeNavigationIcon = 'heroicon-s-user';
-    protected static ?string $modelLabel = 'User';
     protected static ?string $navigationGroup = 'Admin';
+    protected static ?string $modelLabel = 'User';
     protected static ?string $navigationLabel = 'User';
     protected static ?string $slug = 'user';
     protected static ?int $navigationSort = 2;
@@ -107,23 +106,28 @@ class UserResource extends Resource
                     ),
                 ImageColumn::make('file')
                     ->label('File')
-                    ->searchable()
+                    ->defaultImageUrl(asset('/image/default-user.svg'))
                     ->circular(),
                 TextColumn::make('name')
                     ->label('Nama')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('username')
+                    ->label('Username')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('email')
                     ->label('Email')
-                    ->searchable(),
-                TextColumn::make('email_verified_at')
-                    ->label('Diverifikasi')
-                    ->dateTime()
-                    ->sortable()
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('password_string')
+                    ->label('Password')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime()
@@ -134,9 +138,10 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                ToggleColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->label('Status')
-                    ->searchable(),
+                    ->boolean()
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -172,8 +177,8 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            'view' => Pages\ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
+            'view' => Pages\ViewUser::route('/{record}'),
         ];
     }
 

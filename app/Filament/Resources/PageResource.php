@@ -13,13 +13,13 @@ use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
-use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PageResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -30,12 +30,12 @@ class PageResource extends Resource
     protected static ?string $model = Page::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
-    protected static ?string $activeNavigationIcon = 'heroicon-s-document';
+    protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Halaman';
     protected static ?string $navigationLabel = 'Halaman';
     protected static ?string $slug = 'page';
     protected static ?string $recordTitleAttribute = 'title';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -95,11 +95,6 @@ class PageResource extends Resource
                             );
                         }
                     ),
-                TextColumn::make('id')
-                    ->label('Id')
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 ImageColumn::make('file')
                     ->label('File')
                     ->circular()
@@ -108,14 +103,17 @@ class PageResource extends Resource
                     ->label('Judul')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->label('Slug')
+                TextColumn::make('user.name')
+                    ->label('Penulis')
+                    ->badge()
+                    ->color('info')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime()
@@ -126,8 +124,9 @@ class PageResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                ToggleColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->label('Status')
+                    ->boolean()
                     ->sortable(),
             ])
             ->filters([
@@ -164,8 +163,8 @@ class PageResource extends Resource
         return [
             'index' => Pages\ListPages::route('/'),
             'create' => Pages\CreatePage::route('/create'),
-            'view' => Pages\ViewPage::route('/{record}'),
             'edit' => Pages\EditPage::route('/{record}/edit'),
+            'view' => Pages\ViewPage::route('/{record}'),
         ];
     }
 

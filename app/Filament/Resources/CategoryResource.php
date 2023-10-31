@@ -5,32 +5,31 @@ namespace App\Filament\Resources;
 use stdClass;
 use Filament\Tables;
 use Filament\Forms\Set;
+use App\Models\Category;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use App\Models\Category;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CategoryResource\Pages;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
-    protected static ?string $activeNavigationIcon = 'heroicon-s-bookmark';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Kategori';
     protected static ?string $navigationLabel = 'Kategori';
     protected static ?string $slug = 'categoriy';
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -43,8 +42,8 @@ class CategoryResource extends Resource
                             ->label('Status')
                             ->required()
                             ->default('1'),
-                        TextInput::make('name')
-                            ->label('Nama')
+                        TextInput::make('title')
+                            ->label('Judul')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
@@ -73,22 +72,21 @@ class CategoryResource extends Resource
                             );
                         }
                     ),
-                TextColumn::make('id')
-                    ->label('Id')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('name')
-                    ->label('Nama')
+                TextColumn::make('title')
+                    ->label('Judul')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->label('Slug')
+                TextColumn::make('user.name')
+                    ->label('Penulis')
+                    ->badge()
+                    ->color('info')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime()
@@ -99,8 +97,9 @@ class CategoryResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                ToggleColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->label('Status')
+                    ->boolean()
                     ->sortable(),
             ])
             ->filters([
@@ -137,8 +136,8 @@ class CategoryResource extends Resource
         return [
             'index' => Pages\ListCategories::route('/'),
             'create' => Pages\CreateCategory::route('/create'),
-            'view' => Pages\ViewCategory::route('/{record}'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'view' => Pages\ViewCategory::route('/{record}'),
         ];
     }
 

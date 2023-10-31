@@ -3,9 +3,9 @@
 namespace App\Filament\Resources;
 
 use stdClass;
+use App\Models\Tag;
 use Filament\Forms;
 use Filament\Tables;
-use App\Models\Tag;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -13,10 +13,10 @@ use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TagResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,12 +27,11 @@ class TagResource extends Resource
 {
     protected static ?string $model = Tag::class;
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $activeNavigationIcon = 'heroicon-s-tag';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Tag';
     protected static ?string $navigationLabel = 'Tag';
     protected static ?string $slug = 'tag';
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
@@ -45,8 +44,8 @@ class TagResource extends Resource
                             ->label('Status')
                             ->required()
                             ->default('1'),
-                        TextInput::make('name')
-                            ->label('Nama')
+                        TextInput::make('title')
+                            ->label('Judul')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
@@ -75,22 +74,21 @@ class TagResource extends Resource
                             );
                         }
                     ),
-                TextColumn::make('id')
-                    ->label('Id')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('name')
-                    ->label('Nama')
+                TextColumn::make('title')
+                    ->label('Judul')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('slug')
-                    ->label('Slug')
+                TextColumn::make('user.name')
+                    ->label('Penulis')
+                    ->badge()
+                    ->color('info')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime()
@@ -101,8 +99,9 @@ class TagResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                ToggleColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->label('Status')
+                    ->boolean()
                     ->sortable(),
             ])
             ->filters([
@@ -136,8 +135,8 @@ class TagResource extends Resource
         return [
             'index' => Pages\ListTags::route('/'),
             'create' => Pages\CreateTag::route('/create'),
-            'view' => Pages\ViewTag::route('/{record}'),
             'edit' => Pages\EditTag::route('/{record}/edit'),
+            'view' => Pages\ViewTag::route('/{record}'),
         ];
     }
 

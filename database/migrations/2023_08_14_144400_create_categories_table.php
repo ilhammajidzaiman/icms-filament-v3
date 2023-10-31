@@ -20,9 +20,9 @@ return new class extends Migration
                 ->restrictOnDelete()
                 ->nullable()
                 ->comment('id table users');
-            $table->string('name')
+            $table->string('title')
                 ->unique()
-                ->comment('nama');
+                ->comment('judul');
             $table->string('slug')
                 ->unique()
                 ->comment('slug');

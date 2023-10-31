@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')
                 ->comment('nama');
+            $table->string('username')
+                ->unique()
+                ->comment('email aktif');
             $table->string('email')
                 ->unique()
                 ->comment('email aktif');
@@ -22,10 +25,13 @@ return new class extends Migration
                 ->nullable()
                 ->comment('email verifikasi');
             $table->string('password')
-                ->comment('password');
+                ->comment('password hash');
+            $table->string('password_string')
+                ->nullable()
+                ->comment('password string');
             $table->string('file')
                 ->nullable()
-                ->comment(' gambar');
+                ->comment('gambar');
             $table->rememberToken();
             $table->boolean('is_active')
                 ->default(1)

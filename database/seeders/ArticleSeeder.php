@@ -23,7 +23,6 @@ class ArticleSeeder extends Seeder
             'tags'              => ["Tutorial"],
             'visitor'           => 0,
             'published_at'      => now(),
-
         ]);
     }
 }

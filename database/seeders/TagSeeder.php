@@ -15,47 +15,47 @@ class TagSeeder extends Seeder
     {
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Html',
+            'title'         => 'Html',
             'slug'          => 'html',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Css',
+            'title'         => 'Css',
             'slug'          => 'css',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Bootstrap',
+            'title'         => 'Bootstrap',
             'slug'          => 'Bootstrap',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Tailwind',
+            'title'         => 'Tailwind',
             'slug'          => 'tailwind',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Php',
+            'title'         => 'Php',
             'slug'          => 'php',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Javascript',
+            'title'         => 'Javascript',
             'slug'          => 'Javascript',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Laravel',
+            'title'         => 'Laravel',
             'slug'          => 'laravel',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Livewire',
+            'title'         => 'Livewire',
             'slug'          => 'livewire',
         ]);
         Tag::create([
             'user_id'       => 1,
-            'name'          => 'Filament',
+            'title'         => 'Filament',
             'slug'          => 'filament',
         ]);
     }
