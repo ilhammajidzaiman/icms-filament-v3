@@ -31,7 +31,7 @@ class NavMenuResource extends Resource
     protected static ?string $model = NavMenu::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
-    // protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Nav Menu';
     protected static ?string $navigationLabel = 'Nav Menu';
     protected static ?string $slug = 'nav-menu';
