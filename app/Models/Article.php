@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\NavMenu;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
@@ -15,13 +21,23 @@ class Article extends Model
         'tags' => 'array',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'post_category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function modelable(): MorphOne
+    {
+        return $this->morphOne(NavMenu::class, 'modelable');
+    }
+
+    public function modelables(): MorphMany
+    {
+        return $this->morphMany(NavMenu::class, 'modelable');
     }
 }

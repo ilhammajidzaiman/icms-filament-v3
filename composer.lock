@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cf9dae8e103dc5811d0bcd87dbda03f",
+    "content-hash": "35532b0ce45f286265551fa3e272b7a0",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Althinect/filament-spatie-roles-permissions.git",
-                "reference": "727858fb45dba0c69f35050569c38f0f606334b2"
+                "reference": "10bf6e442bdd64032cd6db331df6a0e9bae1196e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Althinect/filament-spatie-roles-permissions/zipball/727858fb45dba0c69f35050569c38f0f606334b2",
-                "reference": "727858fb45dba0c69f35050569c38f0f606334b2",
+                "url": "https://api.github.com/repos/Althinect/filament-spatie-roles-permissions/zipball/10bf6e442bdd64032cd6db331df6a0e9bae1196e",
+                "reference": "10bf6e442bdd64032cd6db331df6a0e9bae1196e",
                 "shasum": ""
             },
             "require": {
@@ -65,9 +65,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Althinect/filament-spatie-roles-permissions/issues",
-                "source": "https://github.com/Althinect/filament-spatie-roles-permissions/tree/v2.2.0"
+                "source": "https://github.com/Althinect/filament-spatie-roles-permissions/tree/v2.2.1"
             },
-            "time": "2023-10-27T23:06:22+00:00"
+            "time": "2023-11-01T16:58:27+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2136,16 +2136,16 @@
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
-            "version": "3.3.2",
+            "version": "3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kirschbaum-development/eloquent-power-joins.git",
-                "reference": "260f8d24306ec1731bd270104f0bc3655c4dbd32"
+                "reference": "e55fa70dfa4a5e897443454825b9d4ce6081786a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kirschbaum-development/eloquent-power-joins/zipball/260f8d24306ec1731bd270104f0bc3655c4dbd32",
-                "reference": "260f8d24306ec1731bd270104f0bc3655c4dbd32",
+                "url": "https://api.github.com/repos/kirschbaum-development/eloquent-power-joins/zipball/e55fa70dfa4a5e897443454825b9d4ce6081786a",
+                "reference": "e55fa70dfa4a5e897443454825b9d4ce6081786a",
                 "shasum": ""
             },
             "require": {
@@ -2192,22 +2192,22 @@
             ],
             "support": {
                 "issues": "https://github.com/kirschbaum-development/eloquent-power-joins/issues",
-                "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/3.3.2"
+                "source": "https://github.com/kirschbaum-development/eloquent-power-joins/tree/3.3.3"
             },
-            "time": "2023-10-29T00:53:00+00:00"
+            "time": "2023-10-31T18:01:18+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v10.30.0",
+            "version": "v10.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3dd85d9dbea82b937f8eaf344b50d613c5d1127a"
+                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3dd85d9dbea82b937f8eaf344b50d613c5d1127a",
-                "reference": "3dd85d9dbea82b937f8eaf344b50d613c5d1127a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
+                "reference": "7a2da50258c4d0f693b738d3f3c69b2693aea6c1",
                 "shasum": ""
             },
             "require": {
@@ -2396,20 +2396,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-10-31T13:19:45+00:00"
+            "time": "2023-11-01T13:52:17+00:00"
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.1.12",
+            "version": "v0.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "b35f249028c22016e45e48626e19e5d42fd827ff"
+                "reference": "e1379d8ead15edd6cc4369c22274345982edc95a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/b35f249028c22016e45e48626e19e5d42fd827ff",
-                "reference": "b35f249028c22016e45e48626e19e5d42fd827ff",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/e1379d8ead15edd6cc4369c22274345982edc95a",
+                "reference": "e1379d8ead15edd6cc4369c22274345982edc95a",
                 "shasum": ""
             },
             "require": {
@@ -2451,9 +2451,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.1.12"
+                "source": "https://github.com/laravel/prompts/tree/v0.1.13"
             },
-            "time": "2023-10-18T14:18:57+00:00"
+            "time": "2023-10-27T13:53:59+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4774,6 +4774,76 @@
                 }
             ],
             "time": "2023-02-14T16:54:54+00:00"
+        },
+        {
+            "name": "solution-forest/filament-tree",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/solutionforest/filament-tree.git",
+                "reference": "40db2439a389c45c5a77af6996f47a5ac9af7883"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/solutionforest/filament-tree/zipball/40db2439a389c45c5a77af6996f47a5ac9af7883",
+                "reference": "40db2439a389c45c5a77af6996f47a5ac9af7883",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "filament/support": "^3.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "nunomaduro/larastan": "^2.0.1",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "spatie/laravel-ray": "^1.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SolutionForest\\FilamentTree\\FilamentTreeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SolutionForest\\FilamentTree\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carly",
+                    "email": "info@solutionforest.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is a tree layout plugin for Filament Admin",
+            "homepage": "https://github.com/solution-forest/filament-tree",
+            "keywords": [
+                "Solution Forest",
+                "filament-tree",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/solution-forest/filament-tree/issues",
+                "source": "https://github.com/solution-forest/filament-tree"
+            },
+            "time": "2023-10-06T08:25:53+00:00"
         },
         {
             "name": "spatie/color",
