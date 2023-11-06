@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\NavMenuResource\Pages;
 
 use App\Filament\Resources\NavMenuResource;
+use App\Filament\Resources\NavMenuResource\Widgets\NavMenuOverview;
 use App\Filament\Resources\NavMenuResource\Widgets\NavMenuWidget;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -28,7 +29,8 @@ class ListNavMenus extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            NavMenuWidget::class
+            NavMenuOverview::class,
+            NavMenuWidget::class,
         ];
     }
 }

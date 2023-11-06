@@ -28,7 +28,7 @@ class InformationResource extends Resource
 {
     protected static ?string $model = Information::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bell';
+    protected static ?string $navigationIcon = 'heroicon-o-exclamation-circle';
     protected static ?string $navigationGroup = 'Media';
     protected static ?string $modelLabel = 'Informasi';
     protected static ?string $navigationLabel = 'Informasi';
@@ -100,6 +100,7 @@ class InformationResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('title')
                     ->label('Judul')
+                    ->wrap()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')

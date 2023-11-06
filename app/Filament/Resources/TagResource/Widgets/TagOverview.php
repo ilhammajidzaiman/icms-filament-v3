@@ -14,11 +14,11 @@ class TagOverview extends BaseWidget
     {
         return [
             Stat::make('Semua', Tag::all()->count())
-                ->chart([Tag::all()->count()]),
+                ->color('primary'),
             Stat::make('Aktif', Tag::where('is_active', true)->count())
                 ->color('success'),
             Stat::make('Tidak Aktif', Tag::where('is_active', false)->count())
-                ->color('success'),
+                ->color('warning'),
         ];
     }
 }

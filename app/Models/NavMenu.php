@@ -25,8 +25,6 @@ class NavMenu extends Model
         'is_active',
     ];
 
-    // protected $table = 'nav_menus';
-
     protected $casts = [
         'is_active' => 'boolean',
     ];

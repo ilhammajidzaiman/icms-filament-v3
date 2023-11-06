@@ -28,7 +28,7 @@ class CategoryResource extends Resource
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Kategori';
     protected static ?string $navigationLabel = 'Kategori';
-    protected static ?string $slug = 'categoriy';
+    protected static ?string $slug = 'kategori';
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 1;
 

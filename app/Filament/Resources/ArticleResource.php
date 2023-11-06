@@ -38,7 +38,7 @@ class ArticleResource extends Resource
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Artikel';
     protected static ?string $navigationLabel = 'Artikel';
-    protected static ?string $slug = 'article';
+    protected static ?string $slug = 'artikel';
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 3;
 
@@ -187,6 +187,7 @@ class ArticleResource extends Resource
                     ->circular(),
                 TextColumn::make('title')
                     ->label('Judul')
+                    ->wrap()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('visitor')

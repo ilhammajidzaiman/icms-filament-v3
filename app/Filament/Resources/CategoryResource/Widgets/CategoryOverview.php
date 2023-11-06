@@ -14,11 +14,11 @@ class CategoryOverview extends BaseWidget
     {
         return [
             Stat::make('Semua', Category::all()->count())
-                ->chart([Category::all()->count()]),
+                ->color('primary'),
             Stat::make('Aktif', Category::where('is_active', true)->count())
                 ->color('success'),
             Stat::make('Tidak Aktif', Category::where('is_active', false)->count())
-                ->color('success'),
+                ->color('warning'),
         ];
     }
 }

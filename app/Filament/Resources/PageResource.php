@@ -33,7 +33,7 @@ class PageResource extends Resource
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $modelLabel = 'Halaman';
     protected static ?string $navigationLabel = 'Halaman';
-    protected static ?string $slug = 'page';
+    protected static ?string $slug = 'halaman';
     protected static ?string $recordTitleAttribute = 'title';
     protected static ?int $navigationSort = 4;
 

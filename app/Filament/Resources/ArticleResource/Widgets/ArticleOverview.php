@@ -16,9 +16,9 @@ class ArticleOverview extends BaseWidget
             Stat::make('Semua', Article::all()->count())
                 ->color('primary')
                 ->chart([Article::all()->count()]),
-            Stat::make('Terbit', Article::where('is_active', true)->count())
+            Stat::make('Aktif', Article::where('is_active', true)->count())
                 ->color('success'),
-            Stat::make('Draft', Article::where('is_active', false)->count())
+            Stat::make('Tidak Aktif', Article::where('is_active', false)->count())
                 ->color('warning'),
         ];
     }

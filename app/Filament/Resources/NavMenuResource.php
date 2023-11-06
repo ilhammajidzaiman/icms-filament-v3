@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use stdClass;
 use Filament\Forms;
+use App\Models\Link;
 use App\Models\Page;
 use Filament\Tables;
 use App\Models\Article;
@@ -85,7 +86,6 @@ class NavMenuResource extends Resource
                     ->label('Arahkan Ke')
                     ->required()
                     // ->searchable()
-                    // ->noSearchResultsMessage('Pencarian tidak ditemukan.')
                     ->types([
                         MorphToSelect\Type::make(Article::class)
                             ->titleAttribute('title')
@@ -93,43 +93,12 @@ class NavMenuResource extends Resource
                         MorphToSelect\Type::make(Page::class)
                             ->titleAttribute('title')
                             ->label('Halaman'),
-                        // MorphToSelect\Type::make(Link::class)
-                        //     ->titleAttribute('name')
-                        //     ->label('Link'),
+                        MorphToSelect\Type::make(Link::class)
+                            ->titleAttribute('title')
+                            ->label('Link'),
                     ])
             ]);
     }
-
-    // {
-    //     return $form
-    //         ->schema([
-    //             Forms\Components\Select::make('user_id')
-    //                 ->relationship('user', 'name')
-    //                 ->required(),
-    //             Forms\Components\TextInput::make('parent_id')
-    //                 ->required()
-    //                 ->numeric()
-    //                 ->default(-1),
-    //             Forms\Components\TextInput::make('order')
-    //                 ->required()
-    //                 ->numeric()
-    //                 ->default(0),
-    //             Forms\Components\TextInput::make('modelable_type')
-    //                 ->required()
-    //                 ->maxLength(255),
-    //             Forms\Components\TextInput::make('modelable_id')
-    //                 ->required()
-    //                 ->numeric(),
-    //             Forms\Components\TextInput::make('title')
-    //                 ->required()
-    //                 ->maxLength(255),
-    //             Forms\Components\TextInput::make('slug')
-    //                 ->required()
-    //                 ->maxLength(255),
-    //             Forms\Components\Toggle::make('is_active')
-    //                 ->required(),
-    //         ]);
-    // }
 
     public static function table(Table $table): Table
     {
@@ -145,8 +114,8 @@ class NavMenuResource extends Resource
                 ),
                 TextColumn::make('title')
                     ->label('Judul')
-                    ->sortable()
                     ->wrap()
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('modelable_type')
                     ->label('Model Type')
