@@ -8,6 +8,7 @@ use Filament\Widgets;
 use Filament\PanelProvider;
 use App\Filament\Pages\Account;
 use Filament\Navigation\MenuItem;
+use App\Filament\Pages\Auth\Login;
 use Filament\Support\Colors\Color;
 use App\Filament\Pages\Auth\EditProfile;
 use Filament\Http\Middleware\Authenticate;
@@ -31,12 +32,11 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
+            ->profile(EditProfile::class)
             // ->registration()
             // ->passwordReset()
             // ->emailVerification()
-            ->profile()
-            // ->profile(EditProfile::class)
             ->colors([
                 'danger' => Color::Rose,
                 'info' => Color::Blue,
