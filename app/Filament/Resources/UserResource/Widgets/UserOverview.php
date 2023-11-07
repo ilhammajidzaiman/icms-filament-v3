@@ -14,8 +14,7 @@ class UserOverview extends BaseWidget
     {
         return [
             Stat::make('Semua', User::all()->count())
-                ->color('primary')
-                ->chart([User::all()->count()]),
+                ->color('primary'),
             Stat::make('Aktif', User::where('is_active', true)->count())
                 ->color('success'),
             Stat::make('Tidak aktif', User::where('is_active', false)->count())

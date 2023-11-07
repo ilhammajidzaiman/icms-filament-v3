@@ -14,14 +14,13 @@ class InformationOverview extends BaseWidget
     {
         return [
             Stat::make('Semua', Information::all()->count())
-                ->color('primary')
-                ->chart([Information::all()->count()]),
+                ->color('primary'),
             Stat::make(
-                'Terbit',
+                'Aktif',
                 Information::where('is_active', true)->count()
             )
                 ->color('success'),
-            Stat::make('Draft', Information::where('is_active', false)->count())
+            Stat::make('Tidak Aktif', Information::where('is_active', false)->count())
                 ->color('warning'),
         ];
     }

@@ -15,14 +15,13 @@ class FileOverview extends BaseWidget
     {
         return [
             Stat::make('Semua', File::all()->count())
-                ->color('primary')
-                ->chart([File::all()->count()]),
+                ->color('primary'),
             Stat::make(
-                'Terbit',
+                'Aktif',
                 File::where('is_active', true)->count()
             )
                 ->color('success'),
-            Stat::make('Draft', File::where('is_active', false)->count())
+            Stat::make('Tidak Aktif', File::where('is_active', false)->count())
                 ->color('warning'),
         ];
     }

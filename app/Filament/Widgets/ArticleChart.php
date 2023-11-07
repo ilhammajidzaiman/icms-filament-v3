@@ -13,6 +13,7 @@ class ArticleChart extends ChartWidget
     protected static string $color = 'info';
     protected static ?string $maxHeight = '300px';
     protected static bool $isLazy = true;
+    protected static ?int $sort = 2;
     protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array

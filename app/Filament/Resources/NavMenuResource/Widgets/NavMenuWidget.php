@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\NavMenuResource\Widgets;
 
+use App\Models\Link;
 use App\Models\Page;
 use App\Models\Article;
 use App\Models\NavMenu;
@@ -75,7 +76,6 @@ class NavMenuWidget extends BaseWidget
                 ->label('Arahkan Ke')
                 ->required()
                 // ->searchable()
-                // ->noSearchResultsMessage('Pencarian tidak ditemukan.')
                 ->types([
                     MorphToSelect\Type::make(Article::class)
                         ->titleAttribute('title')
@@ -83,9 +83,9 @@ class NavMenuWidget extends BaseWidget
                     MorphToSelect\Type::make(Page::class)
                         ->titleAttribute('title')
                         ->label('Halaman'),
-                    // MorphToSelect\Type::make(Link::class)
-                    //     ->titleAttribute('name')
-                    //     ->label('Link'),
+                    MorphToSelect\Type::make(Link::class)
+                        ->titleAttribute('title')
+                        ->label('Link'),
                 ])
         ];
     }
