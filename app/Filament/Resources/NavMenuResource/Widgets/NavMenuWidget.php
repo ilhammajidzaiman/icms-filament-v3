@@ -99,11 +99,11 @@ class NavMenuWidget extends BaseWidget
     }
 
     // CUSTOMIZE ICON OF EACH RECORD, CAN DELETE
-    public function getTreeRecordIcon(?\Illuminate\Database\Eloquent\Model $record = null): ?string
-    {
-        // default null
-        return 'heroicon-o-bars-3';
-    }
+    // public function getTreeRecordIcon(?\Illuminate\Database\Eloquent\Model $record = null): ?string
+    // {
+    //     default null
+    //     return 'heroicon-o-bars-3';
+    // }
 
     // CUSTOMIZE ACTION OF EACH RECORD, CAN DELETE 
     // protected function getTreeActions(): array
