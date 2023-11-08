@@ -62,7 +62,8 @@ class LinkResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->disabled()
-                            ->dehydrated(),
+                            ->dehydrated()
+                            ->helperText('Slug akan otomatis dihasilkan dari judul.'),
                         TextInput::make('url')
                             ->label('Url')
                             ->maxLength(255)
@@ -131,9 +132,9 @@ class LinkResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make()->color('blue'),
+                    Tables\Actions\EditAction::make()->color('emerald'),
+                    Tables\Actions\DeleteAction::make()->color('red'),
                 ]),
             ])
             ->bulkActions([

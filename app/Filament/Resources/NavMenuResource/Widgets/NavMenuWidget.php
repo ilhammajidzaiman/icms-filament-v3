@@ -58,12 +58,13 @@ class NavMenuWidget extends BaseWidget
                     TextInput::make('title')
                         ->label('Judul')
                         ->required()
-                        ->maxLength(255)
+                        ->maxLength(50)
                         ->live(onBlur: true)
                         ->afterStateUpdated(fn (Set $set, ?string $state) => $set(
                             'slug',
                             Str::slug($state)
-                        )),
+                        ))
+                        ->helperText('Jumlah maksimal judul 50 karakter.'),
                     TextInput::make('slug')
                         ->label('Slug')
                         ->required()

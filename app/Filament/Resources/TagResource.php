@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\IconColumn;
@@ -38,6 +39,12 @@ class TagResource extends Resource
     {
         return $form
             ->schema([
+                Hidden::make('user_id')
+                    ->label('Id Penulis')
+                    ->required()
+                    ->default(auth()->user()->id)
+                    ->disabled()
+                    ->dehydrated(),
                 Section::make()
                     ->schema([
                         Toggle::make('is_active')
@@ -55,7 +62,8 @@ class TagResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->disabled()
-                            ->dehydrated(),
+                            ->dehydrated()
+                            ->helperText('Slug akan otomatis dihasilkan dari judul.'),
                     ]),
             ]);
     }
@@ -109,9 +117,9 @@ class TagResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make()->color('blue'),
+                    Tables\Actions\EditAction::make()->color('emerald'),
+                    Tables\Actions\DeleteAction::make()->color('red'),
                 ]),
             ])
             ->bulkActions([

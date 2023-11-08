@@ -8,10 +8,12 @@ use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Hash;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
@@ -20,9 +22,14 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\Rules\Password;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use Filament\Infolists\Components\TextEntry\TextEntrySize;
+use Filament\Infolists\Components\Section as InfolistsSection;
 
 class UserResource extends Resource
 {
@@ -148,9 +155,9 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make()->color('blue'),
+                    Tables\Actions\EditAction::make()->color('emerald'),
+                    Tables\Actions\DeleteAction::make()->color('red'),
                 ]),
             ])
             ->bulkActions([
@@ -187,6 +194,48 @@ class UserResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->columns(3)
+            ->schema([
+                InfolistsSection::make()
+                    ->columnSpan(2)
+                    ->schema([
+                        ImageEntry::make('file')
+                            ->hiddenlabel('Gambar')
+                            ->defaultImageUrl(asset('/images/default-user.svg')),
+                        TextEntry::make('name')
+                            ->label('Nama')
+                            ->weight(FontWeight::Medium)
+                            ->size(TextEntrySize::Large),
+                        TextEntry::make('email')
+                            ->label('Email'),
+                        TextEntry::make('username')
+                            ->label('Username'),
+                    ]),
+                InfolistsSection::make()
+                    ->columnSpan(1)
+                    ->schema([
+                        IconEntry::make('is_active')
+                            ->label('Status')
+                            ->boolean(),
+                        TextEntry::make('roles.name')
+                            ->label('Role')
+                            ->badge()
+                            ->color('info')
+                            ->separator(',')
+                            ->size(TextEntrySize::Large),
+                        TextEntry::make('created_at')
+                            ->label('Dibuat')
+                            ->since(),
+                        TextEntry::make('updated_at')
+                            ->label('Diperbarui')
+                            ->since(),
+                    ])
             ]);
     }
 }

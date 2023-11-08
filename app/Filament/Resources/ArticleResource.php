@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use stdClass;
-use App\Models\Tag;
 use Filament\Tables;
 use App\Models\Article;
 use Filament\Forms\Set;
@@ -11,24 +10,30 @@ use App\Models\Category;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
-use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Infolists\Components\ImageEntry;
 use App\Filament\Resources\ArticleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Components\TextEntry\TextEntrySize;
 use App\Filament\Resources\ArticleResource\RelationManagers;
+use Filament\Infolists\Components\Section as InfolistsSection;
 use App\Filament\Resources\ArticleResource\Widgets\ArticleOverview;
 
 class ArticleResource extends Resource
@@ -61,7 +66,8 @@ class ArticleResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->disabled()
-                            ->dehydrated(),
+                            ->dehydrated()
+                            ->helperText('Slug akan otomatis dihasilkan dari judul.'),
                         RichEditor::make('content')
                             ->label('Isi')
                             ->required(),
@@ -80,7 +86,7 @@ class ArticleResource extends Resource
                         Hidden::make('user_id')
                             ->label('Id Penulis')
                             ->required()
-                            ->default(auth()->id())
+                            ->default(auth()->user()->id)
                             ->disabled()
                             ->dehydrated(),
                         Hidden::make('visitor')
@@ -89,14 +95,20 @@ class ArticleResource extends Resource
                             ->default(0)
                             ->disabled()
                             ->dehydrated(),
-                        Select::make('post_category_id')
+                        Select::make('category_id')
                             ->label('Kategori')
                             ->required()
-                            ->options(Category::all()->pluck('name', 'id'))
-                            ->relationship(name: 'category', titleAttribute: 'name')
+                            ->options(Category::all()->pluck('title', 'id'))
+                            ->relationship(name: 'category', titleAttribute: 'title')
                             ->createOptionForm([
-                                TextInput::make('name')
-                                    ->label('Nama')
+                                Hidden::make('user_id')
+                                    ->label('Id Penulis')
+                                    ->required()
+                                    ->default(auth()->user()->id)
+                                    ->disabled()
+                                    ->dehydrated(),
+                                TextInput::make('title')
+                                    ->label('Judul')
                                     ->required()
                                     ->maxLength(255)
                                     ->live(onBlur: true)
@@ -107,11 +119,18 @@ class ArticleResource extends Resource
                                     ->required()
                                     ->maxLength(255)
                                     ->disabled()
-                                    ->dehydrated(),
+                                    ->dehydrated()
+                                    ->helperText('Slug akan otomatis dihasilkan dari judul.'),
                             ])
                             ->editOptionForm([
-                                TextInput::make('name')
-                                    ->label('Nama')
+                                Hidden::make('user_id')
+                                    ->label('Id Penulis')
+                                    ->required()
+                                    ->default(auth()->user()->id)
+                                    ->disabled()
+                                    ->dehydrated(),
+                                TextInput::make('title')
+                                    ->label('Judul')
                                     ->required()
                                     ->maxLength(255)
                                     ->live(onBlur: true)
@@ -122,37 +141,47 @@ class ArticleResource extends Resource
                                     ->required()
                                     ->maxLength(255)
                                     ->disabled()
-                                    ->dehydrated(),
+                                    ->dehydrated()
+                                    ->helperText('Slug akan otomatis dihasilkan dari judul.'),
                             ]),
                         // TagsInput::make('tags')
                         //     ->label('Tanda/Topik')
                         //     ->required()
                         //     // ->separator(',')
-                        //     ->suggestions(Tag::all()->pluck('name')),
+                        //     ->suggestions(Tag::all()->pluck('title')),
                         Select::make('tags')
                             ->label('Tanda/Topik')
                             ->required()
                             ->multiple()
-                            ->searchable()
-                            ->options(Tag::all()->pluck('name', 'id'))
+                            ->relationship(
+                                name: 'tags',
+                                titleAttribute: 'title',
+                                modifyQueryUsing: fn (Builder $query) => $query
+                                    ->orderBy('title')
+                                    ->where('is_active', true),
+                            )
                             ->createOptionForm([
-                                TextInput::make('name')
-                                    ->label('Nama')
+                                Hidden::make('user_id')
+                                    ->label('Id Penulis')
+                                    ->required()
+                                    ->default(auth()->user()->id)
+                                    ->disabled()
+                                    ->dehydrated(),
+                                TextInput::make('title')
+                                    ->label('Judul')
                                     ->required()
                                     ->maxLength(255)
                                     ->live(onBlur: true)
-                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set(
-                                        'slug',
-                                        Str::slug($state)
-                                    ))
-                                    ->unique(table: Tag::class),
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                                 TextInput::make('slug')
                                     ->label('Slug')
                                     ->required()
                                     ->maxLength(255)
                                     ->disabled()
-                                    ->dehydrated(),
-                            ]),
+                                    ->dehydrated()
+                                    ->helperText('Slug akan otomatis dihasilkan dari judul.'),
+                            ])
+                            ->helperText('Anda bisa membuat Tanda/Topik baru jika tidak tersedia.'),
                         FileUpload::make('file')
                             ->label('File')
                             ->required()
@@ -194,12 +223,14 @@ class ArticleResource extends Resource
                     ->label('Pengunjung')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('category.name')
+                TextColumn::make('category.title')
                     ->label('Kategori')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('tags')
-                    ->label('Tag')
+                TextColumn::make('tags.title')
+                    ->label('Tanda/Topik')
+                    ->badge()
+                    ->color('success')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('user.name')
@@ -238,9 +269,9 @@ class ArticleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make(),
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make()->color('blue'),
+                    Tables\Actions\EditAction::make()->color('emerald'),
+                    Tables\Actions\DeleteAction::make()->color('red'),
                 ]),
             ])
             ->bulkActions([
@@ -280,10 +311,57 @@ class ArticleResource extends Resource
             ]);
     }
 
-    public static function getWidgets(): array
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return [
-            ArticleOverview::class,
-        ];
+        return $infolist
+            ->columns(3)
+            ->schema([
+                InfolistsSection::make()
+                    ->columnSpan(2)
+                    ->schema([
+                        ImageEntry::make('file')
+                            ->hiddenlabel('Gambar')
+                            ->defaultImageUrl(asset('/images/default-img.svg')),
+                        TextEntry::make('title')
+                            ->label('Judul')
+                            ->weight(FontWeight::Medium)
+                            ->size(TextEntrySize::Large),
+                        TextEntry::make('slug')
+                            ->label('Slug')
+                            ->color('gray'),
+                        TextEntry::make('category.title')
+                            ->label('Kategori')
+                            ->color('primary'),
+                        TextEntry::make('content')
+                            ->label('Content')
+                            ->html(),
+                        TextEntry::make('tags.title')
+                            ->label('Tanda/Topik')
+                            ->badge()
+                            ->separator(',')
+                            ->size(TextEntrySize::Large),
+                    ]),
+                InfolistsSection::make()
+                    ->columnSpan(1)
+                    ->schema([
+                        IconEntry::make('is_active')
+                            ->label('Status')
+                            ->boolean(),
+                        TextEntry::make('visitor')
+                            ->label('Pengunjung'),
+                        TextEntry::make('user.name')
+                            ->label('Penulis')
+                            ->badge(),
+                        TextEntry::make('published_at')
+                            ->label('Diterbitkan ')
+                            ->since(),
+                        TextEntry::make('created_at')
+                            ->label('Dibuat')
+                            ->since(),
+                        TextEntry::make('updated_at')
+                            ->label('Diperbarui')
+                            ->since(),
+                    ])
+            ]);
     }
 }
