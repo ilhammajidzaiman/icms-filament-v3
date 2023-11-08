@@ -207,7 +207,7 @@ class UserResource extends Resource
                     ->schema([
                         ImageEntry::make('file')
                             ->hiddenlabel('Gambar')
-                            ->defaultImageUrl(asset('/images/default-user.svg')),
+                            ->defaultImageUrl(asset('/image/default-user.svg')),
                         TextEntry::make('name')
                             ->label('Nama')
                             ->weight(FontWeight::Medium)

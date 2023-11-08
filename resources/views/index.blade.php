@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <title>{{ config('app.name') }}</title>
+    <link rel="shortcut icon" href="{{ asset('/image/laravel.svg') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -80,6 +81,57 @@
                 </div>
             </div>
         </div>
+
+
+        <section id="portfolio" class="py-20 bg-slate-50">
+            <div class="container">
+                <div class="w-full px-4">
+                    <div class="max-w-xl mx-auto text-center mb-16">
+                        <h4 class="font-semibold text-2xl text-sky-500">Article</h4>
+                        <h2 class="font-semibold text-lg text-slate-800">Project</h2>
+                        <p class="font-medium text-md text-slate-700">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
+                            illo corrupti alias illum! Quam reiciendis amet facere.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="w-full px-4 flex flex-wrap justify-center">
+                    <div class="p-10 md:w-1/2">
+                        <div
+                            class="rounded-xl overflow-hidden transition ease-in-out delay-150 duration-300 origin-center hover:scale-105 hover:rotate-2 hover:shadow-lg">
+                            <img src="{{ asset('/image/default-img.svg') }}" alt="" class="w-full" />
+                        </div>
+                        <h3 class="text-2xl mt-5 mb-3 font-bold uppercase text-sky-500 ">
+                            <a href="#">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos similique libero maiores!
+                            </a>
+                        </h3>
+                        <p class="font-medium text-base">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                            Accusantium sit iure, est veritatis veniam illum quos. Eos
+                            inventore unde molestiae.
+                        </p>
+                    </div>
+                    <div class="p-10 md:w-1/2">
+                        <div
+                            class="rounded-xl overflow-hidden transition ease-in-out delay-150 duration-300 origin-center hover:scale-105 hover:rotate-2 hover:shadow-lg">
+                            <img src="{{ asset('/image/default-img.svg') }}" alt="" class="w-full" />
+                        </div>
+                        <h3 class="text-2xl mt-5 mb-3 font-bold uppercase text-sky-500 ">
+                            <a href="#">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos similique libero maiores!
+                            </a>
+                        </h3>
+                        <p class="font-medium text-base">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                            Accusantium sit iure, est veritatis veniam illum quos. Eos
+                            inventore unde molestiae.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
 </body>

@@ -321,7 +321,7 @@ class ArticleResource extends Resource
                     ->schema([
                         ImageEntry::make('file')
                             ->hiddenlabel('Gambar')
-                            ->defaultImageUrl(asset('/images/default-img.svg')),
+                            ->defaultImageUrl(asset('/image/default-img.svg')),
                         TextEntry::make('title')
                             ->label('Judul')
                             ->weight(FontWeight::Medium)
