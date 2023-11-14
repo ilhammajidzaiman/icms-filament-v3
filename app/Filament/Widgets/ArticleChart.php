@@ -45,6 +45,7 @@ class ArticleChart extends ChartWidget
     {
         return 'Statistik jumlah post artikel perbulan.';
     }
+
     protected function getType(): string
     {
         return 'line';
