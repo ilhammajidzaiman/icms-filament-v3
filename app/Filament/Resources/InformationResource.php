@@ -35,7 +35,7 @@ class InformationResource extends Resource
     protected static ?string $navigationLabel = 'Informasi';
     protected static ?string $slug = 'informasi';
     protected static ?string $recordTitleAttribute = 'title';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -62,7 +62,8 @@ class InformationResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->disabled()
-                            ->dehydrated(),
+                            ->dehydrated()
+                            ->helperText('Slug akan otomatis dihasilkan dari judul.'),
                         RichEditor::make('content')
                             ->label('Isi'),
                     ]),

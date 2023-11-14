@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Information extends Model
+class Video extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -17,8 +17,8 @@ class Information extends Model
         'user_id',
         'title',
         'slug',
-        'content',
-        'file',
+        'url',
+        'embed',
         'is_active',
     ];
 

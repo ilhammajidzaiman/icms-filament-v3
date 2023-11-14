@@ -30,11 +30,11 @@ class FileResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-archive-box';
     protected static ?string $navigationGroup = 'Media';
-    protected static ?string $modelLabel = 'File';
-    protected static ?string $navigationLabel = 'File';
-    protected static ?string $slug = 'file';
+    protected static ?string $modelLabel = 'Dokumen';
+    protected static ?string $navigationLabel = 'Dokumen';
+    protected static ?string $slug = 'dokumen';
     protected static ?string $recordTitleAttribute = 'title';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -61,14 +61,15 @@ class FileResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->disabled()
-                            ->dehydrated(),
+                            ->dehydrated()
+                            ->helperText('Slug akan otomatis dihasilkan dari judul.'),
                         FileUpload::make('file')
                             ->label('File')
                             ->required()
                             ->maxSize(5120)
                             ->directory('file/' . date('Y/m'))
                             // ->acceptedFileTypes(['application/pdf', 'document/docx'])
-                            ->helperText('Maksimal ukuran file 5120 kb atau 5 mb.'),
+                            ->helperText('Maksimal ukuran file 5120 kb atau 5 mb. Dengan ekstensi file pdf, doc, xls, ppt, jpg, png, svg, zip, rar.'),
                     ]),
                 Section::make()
                     ->columnSpan(1)
@@ -111,6 +112,7 @@ class FileResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('title')
                     ->label('Judul')
+                    ->wrap()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')

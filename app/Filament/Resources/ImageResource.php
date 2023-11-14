@@ -3,10 +3,11 @@
 namespace App\Filament\Resources;
 
 use stdClass;
+use Filament\Forms;
 use Filament\Tables;
+use App\Models\Image;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
-use App\Models\Slideshow;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
@@ -21,24 +22,26 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\SlideshowResource\Pages;
+use App\Filament\Resources\ImageResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\SlideshowResource\RelationManagers;
+use App\Filament\Resources\ImageResource\RelationManagers;
 
-class SlideshowResource extends Resource
+class ImageResource extends Resource
 {
-    protected static ?string $model = Slideshow::class;
-    protected static ?string $navigationIcon = 'heroicon-o-tv';
+    protected static ?string $model = Image::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static ?string $navigationGroup = 'Media';
-    protected static ?string $modelLabel = 'Slideshow';
-    protected static ?string $navigationLabel = 'Slideshow';
-    protected static ?string $slug = 'slideshow';
+    protected static ?string $modelLabel = 'Galeri';
+    protected static ?string $navigationLabel = 'Galeri';
+    protected static ?string $slug = 'galeri';
     protected static ?string $recordTitleAttribute = 'title';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
         return $form
+            ->columns(3)
             ->schema([
                 Hidden::make('user_id')
                     ->label('Id Penulis')
@@ -49,10 +52,6 @@ class SlideshowResource extends Resource
                 Section::make()
                     ->columnSpan(2)
                     ->schema([
-                        Toggle::make('is_active')
-                            ->label('Status')
-                            ->required()
-                            ->default('1'),
                         TextInput::make('title')
                             ->label('Judul')
                             ->maxLength(255)
@@ -64,15 +63,33 @@ class SlideshowResource extends Resource
                             ->disabled()
                             ->dehydrated()
                             ->helperText('Slug akan otomatis dihasilkan dari judul.'),
-                        Textarea::make('subtitle')
-                            ->label('Subtitle')
-                            ->maxLength(255)
-                            ->rows(3),
+                        Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->rows(5)
+                            ->maxLength(1024),
+                        FileUpload::make('galery')
+                            ->label('File galery')
+                            ->maxSize(1024)
+                            ->directory('galery/' . date('Y/m'))
+                            ->image()
+                            ->imageEditor()
+                            ->openable()
+                            ->downloadable()
+                            ->multiple()
+                            ->helperText('Maksimal ukuran file 1024 kb atau 1 mb.'),
+                    ]),
+                Section::make()
+                    ->columnSpan(1)
+                    ->schema([
+                        Toggle::make('is_active')
+                            ->label('Status')
+                            ->required()
+                            ->default('1'),
                         FileUpload::make('file')
-                            ->label('File')
+                            ->label('File cover')
                             ->required()
                             ->maxSize(1024)
-                            ->directory('slideshow/' . date('Y/m'))
+                            ->directory('image/' . date('Y/m'))
                             ->image()
                             ->imageEditor()
                             ->openable()
@@ -86,7 +103,6 @@ class SlideshowResource extends Resource
     {
         return $table
             ->columns([
-
                 TextColumn::make('index')
                     ->label('#')
                     ->state(
@@ -99,7 +115,7 @@ class SlideshowResource extends Resource
                     ),
                 ImageColumn::make('file')
                     ->label('File')
-                    ->defaultImageUrl(asset('/image/default-slideshow.svg'))
+                    ->defaultImageUrl(asset('/image/default-user.svg'))
                     ->circular(),
                 TextColumn::make('title')
                     ->label('Judul')
@@ -164,10 +180,10 @@ class SlideshowResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSlideshows::route('/'),
-            'create' => Pages\CreateSlideshow::route('/create'),
-            'edit' => Pages\EditSlideshow::route('/{record}/edit'),
-            'view' => Pages\ViewSlideshow::route('/{record}'),
+            'index' => Pages\ListImages::route('/'),
+            'create' => Pages\CreateImage::route('/create'),
+            'edit' => Pages\EditImage::route('/{record}/edit'),
+            'view' => Pages\ViewImage::route('/{record}'),
         ];
     }
 

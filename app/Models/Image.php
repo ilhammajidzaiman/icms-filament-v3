@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Information extends Model
+class Image extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -17,13 +17,15 @@ class Information extends Model
         'user_id',
         'title',
         'slug',
-        'content',
+        'description',
         'file',
+        'galery',
         'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'galery' => 'array',
     ];
 
     public function user(): BelongsTo

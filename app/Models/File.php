@@ -11,7 +11,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class File extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $guarded = [];
+
+    protected $fillable =
+    [
+        'user_id',
+        'title',
+        'slug',
+        'thumbnail',
+        'file',
+        'is_active',
+    ];
+
     protected $casts = [
         'is_active' => 'boolean',
     ];
