@@ -6,11 +6,14 @@ use stdClass;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Hash;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
 use Filament\Support\Enums\FontWeight;
@@ -55,26 +58,36 @@ class UserResource extends Resource
                             ->label('Nama')
                             ->required()
                             ->maxLength(255),
+                        TextInput::make('username')
+                            ->label('Username')
+                            ->required()
+                            ->unique(ignoreRecord: true)
+                            ->maxLength(255),
                         TextInput::make('email')
-                            ->label('E-mail')
+                            ->label('Email')
                             ->email()
                             ->required()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(255),
                         TextInput::make('password')
                             ->label('Password')
                             ->password()
-                            ->required()
                             ->maxLength(255)
-                            ->same('confirmation')
-                            // ->autocomplete('new-password')
-                            ->rule(Password::default())
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
+                            ->dehydrated(fn (?string $state): bool => filled($state))
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('password_string', $state)),
                         TextInput::make('confirmation')
-                            ->label('Konfirmasi password')
+                            ->label('Konfirmasi Password')
+                            ->same('password')
                             ->password()
-                            ->required()
-                            ->maxLength(255)
-                            ->dehydrated(false),
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->visible(fn (Get $get): bool => filled($get('password')))
+                            ->maxLength(255),
+                        Hidden::make('password_string')
+                            ->label('Password String')
+                            ->disabled()
+                            ->dehydrated(),
                     ]),
                 Section::make()
                     ->columnSpan(1)
@@ -85,7 +98,6 @@ class UserResource extends Resource
                             ->default('1'),
                         FileUpload::make('file')
                             ->label('File')
-                            ->required()
                             ->maxSize(1024)
                             ->directory('user/' . date('Y/m'))
                             ->image()
