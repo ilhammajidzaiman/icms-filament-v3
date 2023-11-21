@@ -1,8 +1,11 @@
 @php
     use App\Models\Article;
-
+    use App\Models\Image;
     $articles = Article::active()
-        ->limit(5)
+        ->limit(7)
+        ->get();
+    $images = Image::active()
+        ->limit(11)
         ->get();
 @endphp
 <!doctype html>
@@ -88,33 +91,79 @@
         </div>
     </div>
 
-    <div class="mx-auto p-5 flex flex-wrap justify-center gap-5">
-        <div class="w-full px-4">
-            <div class="max-w-xl mx-auto text-center my-3">
-                <h1 class="font-semibold text-2xl text-sky-500">Article</h1>
-            </div>
-        </div>
-        @forelse ($articles as $article)
-            <div class="bg-white rounded-xl shadow-xl w-80">
+    <section id="berita" class="bg-slate-100 px-4 py-20">
+        <div
+            class="grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
+            <div class="bg-gradient-to-r from-sky-500 to-blue-500 rounded-xl shadow-md relative overflow-hidden">
+                <div class="w-full h-64 object-cover rounded-xl bg-gradient-to-r from-sky-500 to-blue-500"></div>
                 <div
-                    class="rounded-xl overflow-hidden transition ease-in-out delay-150 duration-300 origin-center hover:scale-105 hover:rotate-2 hover:shadow-lg">
-                    <img src="{{ asset('/image/default-img.svg') }}" alt="{{ asset('/image/default-img.svg') }}"
-                        class="w-full" />
-                </div>
-                <div class="px-6 py-3">
-                    <h3 class="font-bold">
-                        <a href="/article/{{ $article->slug }}">
-                            {{ $article->title }}
+                    class="absolute flex flex-col justify-center items-center inset-0  hover:duration-500 hover:opacity-80 bg-white hover:scale-150 ease-in-out duration-300">
+                    <h6 class="font-bold text-xl mb-4">
+                        Berita
+                    </h6>
+                    <p class="text-slate-700">
+                        <a href="">
+                            Lihat selengkapnya →
                         </a>
-                    </h3>
-                    <p class="text-sm">
-                        {{ Str::limit(strip_tags($article->content), 200, '...') }}
                     </p>
                 </div>
             </div>
-        @empty
-        @endforelse
-    </div>
+            @forelse ($articles as $article)
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="row-span-1 rounded-xl overflow-hidden">
+                        <img src="{{ asset('/storage/' . $article->file ?? '/image/default-img.svg') }}" alt="Gambar"
+                            class="w-full h-64 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-110 overflow-hidden delay-300">
+                    </div>
+                    <div class="p-4">
+                        <h6 class="font-bold mb-4 text-ellipsis overflow-hidden ...">
+                            {{-- {{ $article->title ?? null }} --}}
+                            {{ Str::limit(strip_tags($article->title ?? null), 200, '...') }}
+                        </h6>
+                        {{-- <p class="text-slate-700">
+                            {{ $article->c ?? null }}
+                            {{ Str::limit(strip_tags($article->content ?? null), 200, '...') }}
+                        </p> --}}
+                    </div>
+                </div>
+            @empty
+            @endforelse
+        </div>
+    </section>
+
+    <section id="galeri" class="bg-gradient-to-r from-sky-500 to-blue-500 px-4 py-20">
+        <div
+            class="grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
+            <div class="bg-white rounded-xl shadow-md relative overflow-hidden">
+                <div class="w-full h-64 object-cover rounded-xl bg-white"></div>
+                <div
+                    class="absolute flex flex-col justify-center items-center inset-0  hover:duration-500 hover:opacity-80 bg-white hover:scale-150 ease-in-out duration-500">
+                    <h6 class="font-bold text-xl mb-4">
+                        Galeri
+                    </h6>
+                    <p class="text-slate-700">
+                        <a href="">
+                            Lihat selengkapnya →
+                        </a>
+                    </p>
+                </div>
+            </div>
+            @foreach ($images as $image)
+                <div class="bg-white rounded-xl shadow-md relative overflow-hidden">
+                    <img src="{{ asset('/storage/' . $image->file) }}" alt="{{ $image->file }}"
+                        class="w-full h-64 object-cover rounded-xl">
+                    <a href="galeri/{{ $image->id }}"
+                        class="absolute flex flex-col justify-center items-center inset-0 opacity-0 hover:duration-500 hover:opacity-80 bg-white p-4 ease-in-out duration-500">
+                        <h6 class="font-bold mb-4">
+                            {{ $image->title ?? null }}
+                        </h6>
+                        <p class="text-slate-700">
+                            {{ $image->description ?? null }}
+                        </p>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </section>
 
 </body>
 
