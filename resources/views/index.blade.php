@@ -91,11 +91,12 @@
         </div>
     </div>
 
+
     <section id="berita" class="bg-slate-100 px-4 py-20">
         <div
             class="grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
-            <div class="bg-gradient-to-r from-sky-500 to-blue-500 rounded-xl shadow-md relative overflow-hidden">
-                <div class="w-full h-64 object-cover rounded-xl bg-gradient-to-r from-sky-500 to-blue-500"></div>
+            <div class="bg-gradient-to-r from-sky-500 to-sky-800 rounded-xl shadow-md relative overflow-hidden">
+                <div class="w-full h-64 object-cover rounded-xl bg-gradient-to-r from-sky-500 to-sky-800"></div>
                 <div
                     class="absolute flex flex-col justify-center items-center inset-0  hover:duration-500 hover:opacity-80 bg-white hover:scale-150 ease-in-out duration-300">
                     <h6 class="font-bold text-xl mb-4">
@@ -109,20 +110,58 @@
                 </div>
             </div>
             @forelse ($articles as $article)
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                {{-- <div class="bg-white rounded-xl shadow-md overflow-hidden ">
                     <div class="row-span-1 rounded-xl overflow-hidden">
                         <img src="{{ asset('/storage/' . $article->file ?? '/image/default-img.svg') }}" alt="Gambar"
                             class="w-full h-64 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-110 overflow-hidden delay-300">
                     </div>
-                    <div class="p-4">
-                        <h6 class="font-bold mb-4 text-ellipsis overflow-hidden ...">
-                            {{-- {{ $article->title ?? null }} --}}
-                            {{ Str::limit(strip_tags($article->title ?? null), 200, '...') }}
+                    <div class="space-y-2 p-4">
+                        <div class="text-sm text-slate-500 mb-3">
+                            {{ $article->created_at->diffForHumans() . ', ' . $article->created_at->format('d-m-Y, H:i:s') }}
+                        </div>
+                        <h6 class="font-normal text-lg text-slate-700 line-clamp-3">
+                            <a href="" class="hover:underline">
+                                {{ Str::limit(strip_tags($article->title ?? null), 150, '...') }}
+                            </a>
                         </h6>
-                        {{-- <p class="text-slate-700">
-                            {{ $article->c ?? null }}
-                            {{ Str::limit(strip_tags($article->content ?? null), 200, '...') }}
-                        </p> --}}
+                        <div class="text-sm text-slate-500 w-fit mt-auto p">
+                            {{ App\Helpers\EstimateReadingTime($article->content) }}
+                            Menit baca
+                        </div>
+                    </div>
+                </div> --}}
+                <div class="group relative duration-300 bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative z-10 flex h-full flex-col items-start">
+                        <div class="w-full rounded-xl overflow-hidden">
+                            <img src="{{ asset('/storage/' . $article->file ?? '/image/default-img.svg') }}"
+                                alt="Gambar"
+                                class="w-full h-64 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-110 overflow-hidden delay-300">
+                        </div>
+
+                        <div class="p-4">
+                            <div class="text-sm text-slate-500 mb-3">
+                                {{ $article->created_at->diffForHumans() . ', ' . $article->created_at->format('d-m-Y, H:i:s') }}
+                            </div>
+                            <h1 class="font-normal text-lg text-slate-700 line-clamp-3">
+                                <a href="" class="hover:underline">
+                                    {{ Str::limit(strip_tags($article->title ?? null), 150, '...') }}
+                                </a>
+                            </h1>
+                        </div>
+
+                        <div class="grid grid-rows-2 grid-flow-col gap-4 w-full mt-auto p-4">
+                            <div class="row-end-3 row-span-3 text-left">
+                                <span class="text-sm text-slate-500">
+                                    {{ App\Helpers\EstimateReadingTime($article->content) }}
+                                    Menit baca
+                                </span>
+                            </div>
+                            <div class="row-end-3 row-span-3 text-right">
+                                <a href=""
+                                    class="py-1 px-3 bg-sky-100 hover:bg-sky-200 rounded-full  text-sm font-medium text-sky-500 hover:text-sky-600">
+                                    Selengkapnya →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @empty
@@ -130,7 +169,8 @@
         </div>
     </section>
 
-    <section id="galeri" class="bg-gradient-to-r from-sky-500 to-blue-500 px-4 py-20">
+
+    <section id="galeri" class="bg-gradient-to-r from-sky-500 to-sky-800 px-4 py-20">
         <div
             class="grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
             <div class="bg-white rounded-xl shadow-md relative overflow-hidden">
