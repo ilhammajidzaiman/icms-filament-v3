@@ -21,7 +21,7 @@
 
 <body class="bg-slate-50">
     <header class="absolute inset-x-0 top-0 z-50">
-        <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+        <nav class="max-w-screen-xl flex items-center justify-between p-6 lg:px-8 mx-auto" aria-label="Global">
             <div class="flex lg:flex-1">
                 <a href="#" class="-m-1.5 p-1.5">
                     <span class="sr-only">Your Company</span>
@@ -91,14 +91,14 @@
         </div>
     </div>
 
-
     <section id="berita" class="bg-slate-100 px-4 py-20">
         <div
-            class="grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
-            <div class="bg-gradient-to-r from-sky-500 to-sky-800 rounded-xl shadow-md relative overflow-hidden">
-                <div class="w-full h-64 object-cover rounded-xl bg-gradient-to-r from-sky-500 to-sky-800"></div>
+            class="max-w-screen-xl grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 mx-auto">
+            <div
+                class="relative rounded-xl shadow hover:shadow-lg overflow-hidden bg-gradient-to-r from-sky-500 to-sky-800">
+                <div class="w-full h-48 object-cover rounded-xl bg-gradient-to-r from-sky-500 to-sky-800"></div>
                 <div
-                    class="absolute flex flex-col justify-center items-center inset-0  hover:duration-500 hover:opacity-80 bg-white hover:scale-150 ease-in-out duration-300">
+                    class="absolute flex flex-col justify-center items-center inset-0 hover:duration-500 hover:opacity-80 bg-white hover:scale-150 ease-in-out duration-300">
                     <h6 class="font-bold text-xl mb-4">
                         Berita
                     </h6>
@@ -110,43 +110,26 @@
                 </div>
             </div>
             @forelse ($articles as $article)
-                {{-- <div class="bg-white rounded-xl shadow-md overflow-hidden ">
-                    <div class="row-span-1 rounded-xl overflow-hidden">
-                        <img src="{{ asset('/storage/' . $article->file ?? '/image/default-img.svg') }}" alt="Gambar"
-                            class="w-full h-64 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-110 overflow-hidden delay-300">
-                    </div>
-                    <div class="space-y-2 p-4">
-                        <div class="text-sm text-slate-500 mb-3">
-                            {{ $article->created_at->diffForHumans() . ', ' . $article->created_at->format('d-m-Y, H:i:s') }}
-                        </div>
-                        <h6 class="font-normal text-lg text-slate-700 line-clamp-3">
-                            <a href="" class="hover:underline">
-                                {{ Str::limit(strip_tags($article->title ?? null), 150, '...') }}
-                            </a>
-                        </h6>
-                        <div class="text-sm text-slate-500 w-fit mt-auto p">
-                            {{ App\Helpers\EstimateReadingTime($article->content) }}
-                            Menit baca
-                        </div>
-                    </div>
-                </div> --}}
-                <div class="group relative duration-300 bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="group relative duration-300 bg-white rounded-xl shadow hover:shadow-lg overflow-hidden">
                     <div class="relative z-10 flex h-full flex-col items-start">
                         <div class="w-full rounded-xl overflow-hidden">
                             <img src="{{ asset('/storage/' . $article->file ?? '/image/default-img.svg') }}"
                                 alt="Gambar"
-                                class="w-full h-64 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-110 overflow-hidden delay-300">
+                                class="w-full h-48 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-110 overflow-hidden delay-300">
                         </div>
 
                         <div class="p-4">
-                            <div class="text-sm text-slate-500 mb-3">
-                                {{ $article->created_at->diffForHumans() . ', ' . $article->created_at->format('d-m-Y, H:i:s') }}
+                            <div class="px-2 py-1 bg-sky-100 w-fit rounded-md text-sky-800">
+                                <p class="text-sm ">{{ $article->category->title }}</p>
                             </div>
-                            <h1 class="font-normal text-lg text-slate-700 line-clamp-3">
+                            <h1 class="font-semibold text-slate-700 line-clamp-3 my-3">
                                 <a href="" class="hover:underline">
                                     {{ Str::limit(strip_tags($article->title ?? null), 150, '...') }}
                                 </a>
                             </h1>
+                            <div class="text-sm text-slate-500">
+                                {{ $article->created_at->diffForHumans() . ', ' . $article->created_at->format('d-m-Y, H:i:s') }}
+                            </div>
                         </div>
 
                         <div class="grid grid-rows-2 grid-flow-col gap-4 w-full mt-auto p-4">
@@ -158,7 +141,7 @@
                             </div>
                             <div class="row-end-3 row-span-3 text-right">
                                 <a href=""
-                                    class="py-1 px-3 bg-sky-100 hover:bg-sky-200 rounded-full  text-sm font-medium text-sky-500 hover:text-sky-600">
+                                    class="py-2 px-3 bg-sky-100 hover:bg-sky-200 rounded-full  text-sm font-medium text-sky-500 hover:text-sky-600">
                                     Selengkapnya →</a>
                             </div>
                         </div>
@@ -172,9 +155,9 @@
 
     <section id="galeri" class="bg-gradient-to-r from-sky-500 to-sky-800 px-4 py-20">
         <div
-            class="grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4">
+            class="max-w-screen-xl grid grid-cols-none sm:grid-cols-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 mx-auto">
             <div class="bg-white rounded-xl shadow-md relative overflow-hidden">
-                <div class="w-full h-64 object-cover rounded-xl bg-white"></div>
+                <div class="w-full h-48 object-cover rounded-xl bg-white"></div>
                 <div
                     class="absolute flex flex-col justify-center items-center inset-0  hover:duration-500 hover:opacity-80 bg-white hover:scale-150 ease-in-out duration-500">
                     <h6 class="font-bold text-xl mb-4">
@@ -190,7 +173,7 @@
             @foreach ($images as $image)
                 <div class="bg-white rounded-xl shadow-md relative overflow-hidden">
                     <img src="{{ asset('/storage/' . $image->file) }}" alt="{{ $image->file }}"
-                        class="w-full h-64 object-cover rounded-xl">
+                        class="w-full h-48 object-cover rounded-xl">
                     <a href="galeri/{{ $image->id }}"
                         class="absolute flex flex-col justify-center items-center inset-0 opacity-0 hover:duration-500 hover:opacity-80 bg-white p-4 ease-in-out duration-500">
                         <h6 class="font-bold mb-4">
